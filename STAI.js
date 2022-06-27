@@ -1,5 +1,43 @@
+
+//reset responses after hitting submit button
+
+const form = document.getElementById('quiz');
+
+form.addEventListner('submit', function handleSubmit(event)){
+  event.preventDefault();
+
+  form.reset();
+  document.body.innerHTML = "Thanks for submitting";
+});
+
+
+//clear screen after submit ---still doesn't work
+function submitFunction(){
+  form.value = '';
+});
+
+//log Responses ---incomplete
+submitButton.addEventListener('click', )
+
+
+
+
+
+
+
+
+
+
+//(function check(){
+//  document.write('Never give up!');
+//});
+
+
+
+
+
 //set up event listeners
-submitbutton.addEventListener('click', )
+//submitbutton.addEventListener('click', )
 
 
 
