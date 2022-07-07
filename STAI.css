@@ -3,17 +3,29 @@
   margin: 0 auto;
 }
 
-h1 {
+#STAI h1 {
   font-size: 40px;
+  width: 400px;
+  margin: 0 auto;
 }
 
-p{
+#STAI_instructions {
+  font-size: 5px;
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#STAI p{
   font-size: 20px;
 }
 
 #submit_button {
   font-size: 22px;
 }
+
+
+
 
 //margin: 0 auto;
 
