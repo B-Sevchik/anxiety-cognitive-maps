@@ -1,5 +1,5 @@
 
-//reset responses after hitting submit button
+//reset responses after hitting submit button --- form reset doesn't work?
 
 const form = document.getElementById('quiz');
 
@@ -11,14 +11,91 @@ form.addEventListner('submit', function handleSubmit(event)){
 });
 
 
-//clear screen after submit ---still doesn't work
+//clear screen after submit --- not fully working
 function submitFunction(){
   form.value = '';
 });
 
-//log Responses ---incomplete
-submitButton.addEventListener('click', )
+//add event listener to html radio buttons
+var radios = document.forms["STAI"].elements["radio"];
+  for(radio in radios){
+    radio.onclick = function(){
+      alert(radio.value);
+    }
+  }
 
+
+
+var STAI_vals = {}
+const input_array = document.getElementById("STAI").querySelectorAll("input")
+for (inputelement in input_array) {
+  if (inputelement.checked == true) {
+    STAI_vals[inputelement.name] = inputelement.value
+  }
+}
+console.log(STAI_vals)
+
+
+
+
+//new part - looping through each input to see if .checked is true for any element, storing data in dictionary
+// var STAI_vals = {}                                        //define dictionary
+// const questions = document.querySelectorAll(".STAI_question")     //create array with list of all the question names
+// for (inputelement in ) {                                            //loop through for each question...
+//   if (document.getElementById("STAI").querySelectorAll("input").checked == true) {  //if input was checked...
+//     STAI_vals[inputelement.name] = inputelement.value                               //add it to the dictionary
+//   }
+// }
+// console.log(STAI_vals)
+
+
+
+
+
+
+
+
+// var STAI_vals = {}
+// const name = document.querySelectorAll("#STAI name[type=text]")
+// for (var i = 0, element; element=elements[i++];) {
+//   if (document.getElementById("STAI").querySelectorAll("input").checked == true) {
+//     STAI_vals[inputelement.name] = inputelement.value
+//   }
+// }
+// console.log(STAI_vals)
+
+
+
+// var STAI_vals = {}
+// var elements = document.querySelectorAll("#STAI input[type=text]")
+// for (var i = 0, element; element=elements[i++];) {
+//   if (document.getElementById("STAI").querySelectorAll("input").checked == true) {
+//     STAI_vals[inputelement.name] = inputelement.value
+//   }
+// }
+// console.log(STAI_vals)
+
+
+//for question in list
+
+///////////
+// for each question name tag value
+// if document.getElementById("STAI").querySelectorAll("input").checked is true for any input
+//   get its .name tag value "question1" and set that value
+//   or get is value "1"
+//
+//
+// STAI_vals[inputelement.name] = inputelement.value
+
+
+
+
+//document.getElementById("STAI").querySelectorAll("input").checked;
+
+// const select = document.querySelector"#STAI");
+// select.addEventListener('click', (event) =>
+//
+// });
 
 
 
