@@ -1,9 +1,9 @@
-#STAI {
+#STAI_div {
   width: 400px;
   margin: 0 auto;
 }
 
-#STAI h1 {
+#STAI_div h1 {
   font-size: 40px;
   width: 400px;
   margin: 0 auto;
@@ -16,11 +16,11 @@
   text-align: center;
 }
 
-#STAI p{
+#STAI_div p{
   font-size: 20px;
 }
 
-#submit_button {
+#STAI_submit {
   font-size: 22px;
 }
 

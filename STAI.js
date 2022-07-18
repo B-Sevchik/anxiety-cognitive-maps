@@ -1,4 +1,33 @@
 
+$(document).ready(function(){
+
+  $(document).on("click", "#STAI_submit", function(){
+
+    // code for submit button here
+    var STAI_vals = {}
+    var input_array = document.getElementById('STAI').querySelectorAll('input');
+    console.log(input_array);
+
+    for (let inputelement = 0; inputelement < input_array.length; inputelement++) {
+
+      if (input_array[inputelement].checked == true) {
+        console.log(input_array[inputelement]);
+
+        STAI_vals[input_array[inputelement].name] = input_array[inputelement].value;
+
+      }
+
+    };
+
+    console.log(STAI_vals);
+
+  });
+
+
+})
+
+
+
 //reset responses after hitting submit button --- form reset doesn't work?
 
 //const form = document.getElementById('STAI');
@@ -27,12 +56,12 @@
 
 
 //event listener
-const radios = document.querySelectorAll('input')
-for (const radio of radios) {
-  radio.onclick = (e) => {
-    console.log(e.target.value);
-  }
-}
+// const radios = document.querySelectorAll('input')
+// for (const radio of radios) {
+//   radio.onclick = (e) => {
+//     console.log(e.target.value);
+//   }
+// }
 
 
 
@@ -45,23 +74,6 @@ for (const radio of radios) {
 //   console.log(STAI_vals)
 //   }
 // }
-
-var STAI_vals = {}
-var input_array = document.getElementById('STAI').querySelectorAll('input');
-console.log(input_array);
-for (let inputelement = 0; inputelement < input_array.length; inputelement++) {
-  input_array[inputelement].onclick = (e) => {
-  if (input_array[inputelement].checked == true) {
-    STAI_vals[input_array[inputelement].name] = input_array[inputelement].value;
-    console.log(STAI_vals)
-  }
-};
-  console.log(input_array[inputelement].name);
-  console.log(input_array[inputelement].value);
-  console.log(input_array[inputelement].checked);
-};
-console.log(STAI_vals);
-console.log(input_array);
 
 
 // console.log(inputelement);
