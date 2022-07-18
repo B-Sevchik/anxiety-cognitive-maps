@@ -1,39 +1,91 @@
 
 //reset responses after hitting submit button --- form reset doesn't work?
 
-const form = document.getElementById('quiz');
+//const form = document.getElementById('STAI');
 
-form.addEventListner('submit', function handleSubmit(event)){
-  event.preventDefault();
+// form.addEventListner('submit', function handleSubmit(event)){
+//  event.preventDefault();
+//  console.log(STAI_values);
 
-  form.reset();
-  document.body.innerHTML = "Thanks for submitting";
-});
+  //form.reset();
+  //document.body.innerHTML = "Thanks for submitting";
+//});
 
 
 //clear screen after submit --- not fully working
-function submitFunction(){
-  form.value = '';
-});
+//function submitFunction(){
+  //form.value = '';
+//});
 
 //add event listener to html radio buttons
-var radios = document.forms["STAI"].elements["radio"];
-  for(radio in radios){
-    radio.onclick = function(){
-      alert(radio.value);
-    }
-  }
+// var radios = document.forms["STAI"].elements["radio"];
+//   for(radio in radios){
+//     radio.onclick = function(){
+//       alert(radio.value);
+//     }
+//   }
 
 
-
-var STAI_vals = {}
-const input_array = document.getElementById("STAI").querySelectorAll("input")
-for (inputelement in input_array) {
-  if (inputelement.checked == true) {
-    STAI_vals[inputelement.name] = inputelement.value
+//event listener
+const radios = document.querySelectorAll('input')
+for (const radio of radios) {
+  radio.onclick = (e) => {
+    console.log(e.target.value);
   }
 }
-console.log(STAI_vals)
+
+
+
+
+// var STAI_vals = {}
+// const input_array = document.getElementById('STAI').querySelectorAll('input')
+// for (inputelement in input_array) {
+//   if (inputelement.checked == true) {
+//     STAI_vals[inputelement.name] = inputelement.value
+//   console.log(STAI_vals)
+//   }
+// }
+
+var STAI_vals = {}
+var input_array = document.getElementById('STAI').querySelectorAll('input');
+console.log(input_array);
+for (let inputelement = 0; inputelement < input_array.length; inputelement++) {
+  input_array[inputelement].onclick = (e) => {
+  if (input_array[inputelement].checked == true) {
+    STAI_vals[input_array[inputelement].name] = input_array[inputelement].value;
+    console.log(STAI_vals)
+  }
+};
+  console.log(input_array[inputelement].name);
+  console.log(input_array[inputelement].value);
+  console.log(input_array[inputelement].checked);
+};
+console.log(STAI_vals);
+console.log(input_array);
+
+
+// console.log(inputelement);
+// console.log(input_array[inputelement]);
+
+// var STAI_vals = {};
+// var input_array = new Array(document.getElementById('STAI').querySelectorAll('input'));
+// for (let inputelement of input_array) {
+//   if (inputelement.checked == true) {
+//     STAI_vals[inputelement.name] = inputelement.value
+//   }
+// };
+// console.log(STAI_vals)
+
+//!!!!!!!!!!
+// var STAI_vals = {};
+// const input_array = document.getElementById('STAI').querySelectorAll('input');
+// for (inputelement in input_array) {
+//   if (inputelement.checked == true) {
+//     STAI_vals[inputelement.name] = inputelement.value
+//   }
+// };
+// console.log(STAI_vals)
+///////!!!!!!!
 
 
 
