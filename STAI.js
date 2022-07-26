@@ -20,6 +20,27 @@ $(document).ready(function(){
     };
 
     console.log(STAI_vals);
+    console.log(Object.keys(STAI_vals).length)
+    identifyUnansweredQuestions1();
+    identifyUnansweredQuestions2();
+    identifyUnansweredQuestions3();
+    identifyUnansweredQuestions4();
+    identifyUnansweredQuestions5();
+    identifyUnansweredQuestions6();
+    identifyUnansweredQuestions7();
+    identifyUnansweredQuestions8();
+    identifyUnansweredQuestions9();
+    identifyUnansweredQuestions10();
+    identifyUnansweredQuestions11();
+    identifyUnansweredQuestions12();
+    identifyUnansweredQuestions13();
+    identifyUnansweredQuestions14();
+    identifyUnansweredQuestions15();
+    identifyUnansweredQuestions16();
+    identifyUnansweredQuestions17();
+    identifyUnansweredQuestions18();
+    identifyUnansweredQuestions19();
+    identifyUnansweredQuestions20();
 
   });
 
@@ -27,6 +48,394 @@ $(document).ready(function(){
 })
 
 
+// function identifyUnansweredQuestions(){
+//   const question_array = document.getElementById("STAI").getElementsbyClassName("STAI_question");
+//   console.log(question_array);
+//
+//   for (let question = 0; question < question_array.length; question++) {
+//     if (document.getElementsByClassName('option_1').checked==false &&
+//         document.getElementsByClassName('option_2').checked==false &&
+//         document.getElementsByClassName('option_3').checked==false &&
+//         document.getElementsByClassName('option_4').checked==false) {
+//           inputelement.style.color = "#FF0000";
+//     }
+//   };
+
+
+function identifyUnansweredQuestions1(){
+  var Q1_vals = {}
+  const input_Q1_array = document.getElementById('STAI_question1').querySelectorAll('input');
+  console.log(input_Q1_array)
+  for (let inputelement = 0; inputelement < input_Q1_array.length; inputelement++) {
+    if (input_Q1_array[inputelement].checked == true) {
+      console.log(input_Q1_array[inputelement]);
+      Q1_vals[input_Q1_array[inputelement].name] = input_Q1_array[inputelement].value;
+    }
+  if (Object.keys(Q1_vals).length < 1) {
+    document.getElementById('STAI_question1').style.color = "#FF0000";
+  }
+  }
+  console.log(Q1_vals);
+}
+
+// function question1Answered(){
+//   var Q1_vals = {}
+//   $(document).on("click", "input", function(){
+//     if (Object.keys(Q1_vals).length > 0) {
+//       document.getElementById('STAI_question1').style.color = "#000000";
+//     }
+//   })
+// }
+
+
+
+
+function identifyUnansweredQuestions2(){
+  var Q2_vals = {}
+  const input_Q2_array = document.getElementById('STAI_question2').querySelectorAll('input');
+  console.log(input_Q2_array)
+  for (let inputelement = 0; inputelement < input_Q2_array.length; inputelement++) {
+    if (input_Q2_array[inputelement].checked == true) {
+      console.log(input_Q2_array[inputelement]);
+      Q2_vals[input_Q2_array[inputelement].name] = input_Q2_array[inputelement].value;
+    }
+  if (Object.keys(Q2_vals).length < 1) {
+    document.getElementById('STAI_question2').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions3(){
+  var Q3_vals = {}
+  const input_Q3_array = document.getElementById('STAI_question3').querySelectorAll('input');
+  console.log(input_Q3_array)
+  for (let inputelement = 0; inputelement < input_Q3_array.length; inputelement++) {
+    if (input_Q3_array[inputelement].checked == true) {
+      console.log(input_Q3_array[inputelement]);
+      Q3_vals[input_Q3_array[inputelement].name] = input_Q3_array[inputelement].value;
+    }
+  if (Object.keys(Q3_vals).length < 1) {
+    document.getElementById('STAI_question3').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions4(){
+  var Q4_vals = {}
+  const input_Q4_array = document.getElementById('STAI_question4').querySelectorAll('input');
+  console.log(input_Q4_array)
+  for (let inputelement = 0; inputelement < input_Q4_array.length; inputelement++) {
+    if (input_Q4_array[inputelement].checked == true) {
+      console.log(input_Q4_array[inputelement]);
+      Q4_vals[input_Q4_array[inputelement].name] = input_Q4_array[inputelement].value;
+    }
+  if (Object.keys(Q4_vals).length < 1) {
+    document.getElementById('STAI_question4').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions5(){
+  var Q5_vals = {}
+  const input_Q5_array = document.getElementById('STAI_question5').querySelectorAll('input');
+  console.log(input_Q5_array)
+  for (let inputelement = 0; inputelement < input_Q5_array.length; inputelement++) {
+    if (input_Q5_array[inputelement].checked == true) {
+      console.log(input_Q5_array[inputelement]);
+      Q5_vals[input_Q5_array[inputelement].name] = input_Q5_array[inputelement].value;
+    }
+  if (Object.keys(Q5_vals).length < 1) {
+    document.getElementById('STAI_question5').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions6(){
+  var Q6_vals = {}
+  const input_Q6_array = document.getElementById('STAI_question6').querySelectorAll('input');
+  console.log(input_Q6_array)
+  for (let inputelement = 0; inputelement < input_Q6_array.length; inputelement++) {
+    if (input_Q6_array[inputelement].checked == true) {
+      console.log(input_Q6_array[inputelement]);
+      Q6_vals[input_Q6_array[inputelement].name] = input_Q6_array[inputelement].value;
+    }
+  if (Object.keys(Q6_vals).length < 1) {
+    document.getElementById('STAI_question6').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions7(){
+  var Q7_vals = {}
+  const input_Q7_array = document.getElementById('STAI_question7').querySelectorAll('input');
+  console.log(input_Q7_array)
+  for (let inputelement = 0; inputelement < input_Q7_array.length; inputelement++) {
+    if (input_Q7_array[inputelement].checked == true) {
+      console.log(input_Q7_array[inputelement]);
+      Q7_vals[input_Q7_array[inputelement].name] = input_Q7_array[inputelement].value;
+    }
+  if (Object.keys(Q7_vals).length < 1) {
+    document.getElementById('STAI_question7').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions8(){
+  var Q8_vals = {}
+  const input_Q8_array = document.getElementById('STAI_question8').querySelectorAll('input');
+  console.log(input_Q8_array)
+  for (let inputelement = 0; inputelement < input_Q8_array.length; inputelement++) {
+    if (input_Q8_array[inputelement].checked == true) {
+      console.log(input_Q8_array[inputelement]);
+      Q8_vals[input_Q8_array[inputelement].name] = input_Q8_array[inputelement].value;
+    }
+  if (Object.keys(Q8_vals).length < 1) {
+    document.getElementById('STAI_question8').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions9(){
+  var Q9_vals = {}
+  const input_Q9_array = document.getElementById('STAI_question9').querySelectorAll('input');
+  console.log(input_Q9_array)
+  for (let inputelement = 0; inputelement < input_Q9_array.length; inputelement++) {
+    if (input_Q9_array[inputelement].checked == true) {
+      console.log(input_Q9_array[inputelement]);
+      Q9_vals[input_Q9_array[inputelement].name] = input_Q9_array[inputelement].value;
+    }
+  if (Object.keys(Q9_vals).length < 1) {
+    document.getElementById('STAI_question9').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions10(){
+  var Q10_vals = {}
+  const input_Q10_array = document.getElementById('STAI_question10').querySelectorAll('input');
+  console.log(input_Q10_array)
+  for (let inputelement = 0; inputelement < input_Q10_array.length; inputelement++) {
+    if (input_Q10_array[inputelement].checked == true) {
+      console.log(input_Q10_array[inputelement]);
+      Q10_vals[input_Q10_array[inputelement].name] = input_Q10_array[inputelement].value;
+    }
+  if (Object.keys(Q10_vals).length < 1) {
+    document.getElementById('STAI_question10').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions11(){
+  var Q11_vals = {}
+  const input_Q11_array = document.getElementById('STAI_question11').querySelectorAll('input');
+  console.log(input_Q11_array)
+  for (let inputelement = 0; inputelement < input_Q11_array.length; inputelement++) {
+    if (input_Q11_array[inputelement].checked == true) {
+      console.log(input_Q11_array[inputelement]);
+      Q11_vals[input_Q11_array[inputelement].name] = input_Q11_array[inputelement].value;
+    }
+  if (Object.keys(Q11_vals).length < 1) {
+    document.getElementById('STAI_question11').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions12(){
+  var Q12_vals = {}
+  const input_Q12_array = document.getElementById('STAI_question12').querySelectorAll('input');
+  console.log(input_Q12_array)
+  for (let inputelement = 0; inputelement < input_Q12_array.length; inputelement++) {
+    if (input_Q12_array[inputelement].checked == true) {
+      console.log(input_Q12_array[inputelement]);
+      Q12_vals[input_Q12_array[inputelement].name] = input_Q12_array[inputelement].value;
+    }
+  if (Object.keys(Q12_vals).length < 1) {
+    document.getElementById('STAI_question12').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions13(){
+  var Q13_vals = {}
+  const input_Q13_array = document.getElementById('STAI_question13').querySelectorAll('input');
+  console.log(input_Q13_array)
+  for (let inputelement = 0; inputelement < input_Q13_array.length; inputelement++) {
+    if (input_Q13_array[inputelement].checked == true) {
+      console.log(input_Q13_array[inputelement]);
+      Q13_vals[input_Q13_array[inputelement].name] = input_Q13_array[inputelement].value;
+    }
+  if (Object.keys(Q13_vals).length < 1) {
+    document.getElementById('STAI_question13').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions14(){
+  var Q14_vals = {}
+  const input_Q14_array = document.getElementById('STAI_question14').querySelectorAll('input');
+  console.log(input_Q14_array)
+  for (let inputelement = 0; inputelement < input_Q14_array.length; inputelement++) {
+    if (input_Q14_array[inputelement].checked == true) {
+      console.log(input_Q14_array[inputelement]);
+      Q14_vals[input_Q14_array[inputelement].name] = input_Q14_array[inputelement].value;
+    }
+  if (Object.keys(Q14_vals).length < 1) {
+    document.getElementById('STAI_question14').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions15(){
+  var Q15_vals = {}
+  const input_Q15_array = document.getElementById('STAI_question15').querySelectorAll('input');
+  console.log(input_Q15_array)
+  for (let inputelement = 0; inputelement < input_Q15_array.length; inputelement++) {
+    if (input_Q15_array[inputelement].checked == true) {
+      console.log(input_Q15_array[inputelement]);
+      Q15_vals[input_Q15_array[inputelement].name] = input_Q15_array[inputelement].value;
+    }
+  if (Object.keys(Q15_vals).length < 1) {
+    document.getElementById('STAI_question15').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions16(){
+  var Q16_vals = {}
+  const input_Q16_array = document.getElementById('STAI_question16').querySelectorAll('input');
+  console.log(input_Q16_array)
+  for (let inputelement = 0; inputelement < input_Q16_array.length; inputelement++) {
+    if (input_Q16_array[inputelement].checked == true) {
+      console.log(input_Q16_array[inputelement]);
+      Q16_vals[input_Q16_array[inputelement].name] = input_Q16_array[inputelement].value;
+    }
+  if (Object.keys(Q16_vals).length < 1) {
+    document.getElementById('STAI_question16').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions17(){
+  var Q17_vals = {}
+  const input_Q17_array = document.getElementById('STAI_question17').querySelectorAll('input');
+  console.log(input_Q17_array)
+  for (let inputelement = 0; inputelement < input_Q17_array.length; inputelement++) {
+    if (input_Q17_array[inputelement].checked == true) {
+      console.log(input_Q17_array[inputelement]);
+      Q17_vals[input_Q17_array[inputelement].name] = input_Q17_array[inputelement].value;
+    }
+  if (Object.keys(Q17_vals).length < 1) {
+    document.getElementById('STAI_question17').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions18(){
+  var Q18_vals = {}
+  const input_Q18_array = document.getElementById('STAI_question18').querySelectorAll('input');
+  console.log(input_Q18_array)
+  for (let inputelement = 0; inputelement < input_Q18_array.length; inputelement++) {
+    if (input_Q18_array[inputelement].checked == true) {
+      console.log(input_Q18_array[inputelement]);
+      Q18_vals[input_Q18_array[inputelement].name] = input_Q18_array[inputelement].value;
+    }
+  if (Object.keys(Q18_vals).length < 1) {
+    document.getElementById('STAI_question18').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions19(){
+  var Q19_vals = {}
+  const input_Q19_array = document.getElementById('STAI_question19').querySelectorAll('input');
+  console.log(input_Q19_array)
+  for (let inputelement = 0; inputelement < input_Q19_array.length; inputelement++) {
+    if (input_Q19_array[inputelement].checked == true) {
+      console.log(input_Q19_array[inputelement]);
+      Q19_vals[input_Q19_array[inputelement].name] = input_Q19_array[inputelement].value;
+    }
+  if (Object.keys(Q19_vals).length < 1) {
+    document.getElementById('STAI_question19').style.color = "#FF0000";
+  }
+  }
+}
+
+function identifyUnansweredQuestions20(){
+  var Q20_vals = {}
+  const input_Q20_array = document.getElementById('STAI_question20').querySelectorAll('input');
+  console.log(input_Q20_array)
+  for (let inputelement = 0; inputelement < input_Q20_array.length; inputelement++) {
+    if (input_Q20_array[inputelement].checked == true) {
+      console.log(input_Q20_array[inputelement]);
+      Q20_vals[input_Q20_array[inputelement].name] = input_Q20_array[inputelement].value;
+    }
+  if (Object.keys(Q20_vals).length < 1) {
+    document.getElementById('STAI_question20').style.color = "#FF0000";
+  }
+  }
+}
+
+
+  // if (Object.keys(STAI_vals).length == 20) {
+  //   document.getElementById("STAI").reset();
+  // }
+  // else{
+  //
+  // }
+// };
+
+// function identifyUnansweredQuestions(){
+//   if (Object.keys(STAI_vals).length == 20) {
+//     form.addEventListner('submit', function handleSubmit(event)){
+//       event.preventDefault();
+//     };
+//   }
+//   else {
+//     var question_array = document.getElementsbyClassName("STAI_question");
+//     console.log(question_array)
+//
+//     for (let questionelement = 0; questionelement < question_array.length; questionelement++) {
+//       var questionelement_array = document.getElementById('STAI_question').querySelectorAll('input');
+//         for (let inputelement = 0; inputelement < questionelement_array.length; inputelement++) {
+//           if (questionelement_array[inputelement].checked == false) {
+//             console.log(questionelement_array[inputelement]);
+//             inputelement.style.color = "#FF0000";
+//           }
+//         }
+//     }
+//   }
+// }
+// you want to check for each question, if at least one of the input elements is checked
+// for each question, create an array of all the inputs for that div document.getElementById('STAI_question1').querySelectorAll('input')
+// use array some method to figure out if something
+//   array some == true, then proceed as normally
+//   if array some == false, then higlight that div in red
+
+
+
+
+
+// function identifyUnansweredQuestions(){
+//   for all inputs in input_array
+//     if dictionary is full (20 things in it)
+//       proceed as normal
+//     else if there are missing questions
+//       identify which question does not have a corresponding input
+//       & highlight that question/div in red
+//
+// 2) for a question in red, if input is clicked under that question, turn it back to black
+//
+// }
+//
+//
+//
+//  1) highlighting any questions that are unanswered in red when they click submit and
+//  2) removing the red again when those options are then clicked
+//  we want to also do a second thing afterwards, which is identify whether the dictionary is finished (all 20 questions are in there)
+//  or whether there are any missing ones. we want to highlight the missing ones in red
+//  two ways to do this: one is go to stai.html and add an ID to each of the divs for each question
+//  (right now they just have classes). then you can say (highlight the div whose id is …)
+//  as we normally do with document.getelementbyid
 
 //reset responses after hitting submit button --- form reset doesn't work?
 
