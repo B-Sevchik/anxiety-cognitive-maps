@@ -20,31 +20,17 @@ $(document).ready(function(){
     };
 
     console.log(STAI_vals);
-    console.log(Object.keys(STAI_vals).length)
-    identifyUnansweredQuestions("STAI_question1");
-    identifyUnansweredQuestions("STAI_question2");
-    identifyUnansweredQuestions("STAI_question3");
-    identifyUnansweredQuestions("STAI_question4");
-    identifyUnansweredQuestions("STAI_question5");
-    identifyUnansweredQuestions("STAI_question6");
-    identifyUnansweredQuestions("STAI_question7");
-    identifyUnansweredQuestions("STAI_question8");
-    identifyUnansweredQuestions("STAI_question9");
-    identifyUnansweredQuestions("STAI_question10");
-    identifyUnansweredQuestions("STAI_question11");
-    identifyUnansweredQuestions("STAI_question12");
-    identifyUnansweredQuestions("STAI_question13");
-    identifyUnansweredQuestions("STAI_question14");
-    identifyUnansweredQuestions("STAI_question15");
-    identifyUnansweredQuestions("STAI_question16");
-    identifyUnansweredQuestions("STAI_question17");
-    identifyUnansweredQuestions("STAI_question18");
-    identifyUnansweredQuestions("STAI_question19");
-    identifyUnansweredQuestions("STAI_question20");
-
+    console.log(Object.keys(STAI_vals).length);
+    console.log(Object.keys(STAI_vals));
+//
+const questions_list_array = document.getElementsByClassName("STAI_question");
+    for (let i = 0; i < questions_list_array.length; i++) {
+      identifyUnansweredQuestions('STAI_question'+(i+1))
+    }
+//
   });
-
-
+//
+//
 })
 
 
@@ -76,6 +62,7 @@ function identifyUnansweredQuestions(questionName){
     }
   }
   console.log(Q_vals);
+  console.log(Object.keys(Q_vals).length);
 }
 
 // function question1Answered(){
