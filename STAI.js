@@ -23,46 +23,55 @@ $(document).ready(function(){
     console.log(Object.keys(STAI_vals).length);
     console.log(Object.keys(STAI_vals));
 //
-const questions_list_array = document.getElementsByClassName("STAI_question");
-    for (let i = 0; i < questions_list_array.length; i++) {
-      identifyUnansweredQuestions('STAI_question'+(i+1))
-    }
+// const questions_list_array = document.getElementsByClassName("STAI_question");
+//     for (let i = 0; i < questions_list_array.length; i++) {
+//       identifyUnansweredQuestions('STAI_question'+(i+1))
+//     }
 //
+// !!!!!
+// const questions_list_array = input_array[inputelement].name;
+//   console.log(questions_list_array);
+//   for (let i = 0; i < questions_list_array.length; i++) {
+//     checkIfItemInDictionary("question"+(i+1), "STAI_vals", "STAI_question"+(i+1))
+//   }
+
+const questions_list_array = document.getElementsByClassName("STAI_question");
+  for (let i = 0; i < questions_list_array.length; i++) {
+    checkIfItemInDictionary("question"+(i+1), "STAI_vals", "STAI_question"+(i+1))
+  }
+// checkIfItemInDictionary("question1", "STAI_vals", "STAI_question1");
+
   });
 //
 //
 })
 
 
-// function identifyUnansweredQuestions(){
-//   const question_array = document.getElementById("STAI").getElementsbyClassName("STAI_question");
-//   console.log(question_array);
-//
-//   for (let question = 0; question < question_array.length; question++) {
-//     if (document.getElementsByClassName('option_1').checked==false &&
-//         document.getElementsByClassName('option_2').checked==false &&
-//         document.getElementsByClassName('option_3').checked==false &&
-//         document.getElementsByClassName('option_4').checked==false) {
-//           inputelement.style.color = "#FF0000";
+
+// function identifyUnansweredQuestions(questionName){
+//   var Q_vals = {}
+//   const input_array = document.getElementById(questionName).querySelectorAll('input');
+//   console.log(input_array)
+//   for (let inputelement = 0; inputelement < input_array.length; inputelement ++) {
+//     if (input_array[inputelement].checked == true) {
+//       console.log(input_array[inputelement]);
+//       Q_vals[input_array[inputelement].name] = input_array[inputelement].value;
 //     }
-//   };
+//     if (Object.keys(Q_vals).length < 1) {
+//       document.getElementById(questionName).style.color = "FF0000";
+//     }
+//   }
+//   console.log(Q_vals);
+//   console.log(Object.keys(Q_vals).length);
+// }
 
-
-function identifyUnansweredQuestions(questionName){
-  var Q_vals = {}
-  const input_array = document.getElementById(questionName).querySelectorAll('input');
-  console.log(input_array)
-  for (let inputelement = 0; inputelement < input_array.length; inputelement ++) {
-    if (input_array[inputelement].checked == true) {
-      console.log(input_array[inputelement]);
-      Q_vals[input_array[inputelement].name] = input_array[inputelement].value;
-    }
-    if (Object.keys(Q_vals).length < 1) {
-      document.getElementById(questionName).style.color = "FF0000";
-    }
+function checkIfItemInDictionary(item, dictionary, question_id){
+  if ((Object.keys(dictionary).includes(item)) == true) {
+    document.getElementById(question_id).style.color = "00000";
   }
-  console.log(Q_vals);
-  console.log(Object.keys(Q_vals).length);
+  else {
+    document.getElememtById(question_id).style.color = "FF000";
+  }
 }
 
 // function question1Answered(){
