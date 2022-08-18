@@ -10,16 +10,24 @@ function updateMainMenu(expStage){
       $("#soundCheck").hide();
       $("#demographicsForm").show();
       break;
-    case 3: //main task
+    case 3: // STAI questionnaire
       $("#demographicsForm").hide();
       $("#soundCheck").hide();
       $("#table").hide();
+      $("#STAI_div").show();
+      break;
+    case 4: //main task
+      $("#demographicsForm").hide();
+      $("#soundCheck").hide();
+      $("#table").hide();
+      $("#STAI_div").hide();
       startExperiment();
       break;
-    case 4: //debriefing
+    case 5: //debriefing
       $("#mturk_form").show();
       $("#demographicsForm").hide();
       $("#soundCheck").hide();
+      $("#STAI_div").hide();
       $("#table").show();
       break;
   }
