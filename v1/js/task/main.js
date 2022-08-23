@@ -12,7 +12,7 @@ let nNetworkTrials = 200; //# of trials in illegal transition task
 let breakEveryNTrials = 100;
 let nPracticeTrials = 20;
 let stimInterval = (speed == "fast") ? 50 : 2000; //1500 is default for now
-let expStage = "main1-1"; //initialize expStage (make sure matches instructions)
+let expStage = "main0"; //initialize expStage (make sure matches instructions)
 let illegalProbability = 0.2; //frequency of illegal transitions
 let correctTime = 1000;
 let incorrectTime = 3000;
@@ -60,7 +60,9 @@ function experimentFlow(){
   }
 
   // go to the relevant task based on expStage variable
-  if (expStage.indexOf("main1") != -1){
+  if (expStage.indexOf("main0") != -1) {
+    STAIQuestionairre();
+  } else if (expStage.indexOf("main1") != -1){
     networkDragTask();
   } else if (expStage.indexOf("main2") != -1){
     if (!repeatNecessary) {
@@ -186,7 +188,7 @@ function startExperiment(){
 
   //set up navButtons
   $(document).on("click", "#navNetworkLearning", function(){
-    expStage = "main1";
+    expStage = "main0";
     runInstructions();
   });
 

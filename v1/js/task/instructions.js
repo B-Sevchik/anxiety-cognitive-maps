@@ -4,17 +4,18 @@
 let instructions = {
   // contains the interator for each instruction block
   iterator: {
-    "main1-1": 1, "main1-2": 1, "main2": 1, "main3": 1, "main4": 1,"prac5": 1, "main6": 1, "main7": 1, "final": 1
+    "main1-1": 1, "main1-2": 1, "main1-3": 1, "main2": 1, "main3": 1, "main4": 1,"prac5": 1, "main6": 1, "main7": 1, "final": 1
   },
   // contains the max value of each instruction iteration. iteration will STOP at max.
   max: {
-    "main1-1": 4, "main1-2": 7, "main2": 6, "main3": 4, "main4": 8,"prac5": 6, "main6": 6, "main7": 5,"final": 1
+    "main1-1": 4, "main1-2": 2, "main1-3": 7, "main2": 6, "main3": 4, "main4": 8,"prac5": 6, "main6": 6, "main7": 5,"final": 1
   },
   // what does instruction section end with?
   // #nextSectionButton, #startExpButton, keyPressNextSection, keyPressStartTask
   exitResponse: {
     "main1-1": '#nextSectionButton',
-    "main1-2": '#startExpButton',
+    "main1-2": '#nextSectionButton',
+    "main1-3": '#startExpButton',
     "main2": 'keyPressStartTask',
     "main3": 'keyPressStartTask',
     "main4": '#startExpButton',
@@ -111,7 +112,14 @@ function getNextInstructions(slideNum, expStage){
         case 4:
           return "Please also remember to respond as quickly and as accurately as possible during the tasks.";
       }
-    case "main1-2":
+      case "main1-2":
+        switch (slideNum){
+          case 1:
+            return "Before completing the main tasks, we will ask you to fill out a brief questionnaire about anxious feelings.";
+          case 2:
+            return "Please be as honest as possible in your responses.";
+        }
+    case "main1-3":
       switch (slideNum){
         case 1:
           $("#network-diagram").insertAfter("#instructions" + slideNum);
