@@ -4,15 +4,16 @@
 let instructions = {
   // contains the interator for each instruction block
   iterator: {
-    "main1-1": 1, "main1-2": 1, "main2": 1, "main3": 1, "main4": 1,"prac5": 1, "main6": 1, "main7": 1, "final": 1
+    "quiz1": 1, "main1-1": 1, "main1-2": 1, "main2": 1, "main3": 1, "main4": 1,"prac5": 1, "main6": 1, "main7": 1, "final": 1
   },
   // contains the max value of each instruction iteration. iteration will STOP at max.
   max: {
-    "main1-1": 4, "main1-2": 7, "main2": 6, "main3": 4, "main4": 8,"prac5": 6, "main6": 6, "main7": 5,"final": 1
+    "quiz1": 2, "main1-1": 4, "main1-2": 7, "main2": 6, "main3": 4, "main4": 8,"prac5": 6, "main6": 6, "main7": 5,"final": 1
   },
   // what does instruction section end with?
   // #nextSectionButton, #startExpButton, keyPressNextSection, keyPressStartTask
   exitResponse: {
+    "quiz1": '#nextSectionButton',
     "main1-1": '#nextSectionButton',
     "main1-2": '#startExpButton',
     "main2": 'keyPressStartTask',
@@ -99,13 +100,21 @@ function getNextInstructions(slideNum, expStage){
     - $("<img src='../pics/finalpics/M33.jpg' class='insertedImage'>").insertAfter( "#instructions" + slideNum);
     - $( getImageText(instructionImages[1])).insertAfter( "#instructions" + slideNum);
 */
-  switch (expStage){
+switch (expStage){
+  case "intro1":
+    switch (slideNum){
+      case 1:
+        return "Welcome to the experiment, thank you for your participation!";
+      case 2:
+        return "Before we start the main experiment, you will complete a self-evaluation questionairre. Please answer the prompts honestly and to the best of your ability.";
+    }
+  switch (slideNum){
     case "main1-1":
       switch (slideNum){
         case 1:
           return "Welcome to the experiment, thank you for your participation!";
         case 2:
-          return "In this experiment you will perform a task where you learn a network structure of objects. You will also complete a few follow-up tasks after you finish the main task, including a few where you will indicate the font color of text. The experiment is expected to take approximately 35 to 45 minutes.";
+          return "In this experiment you will perform a task where you learn a network structure of face images. You will also complete a few follow-up tasks after you finish the main task. The experiment is expected to take approximately 35 minutes.";
         case 3:
           return "Please enlarge this window to its maximum size and sit a comfortable distance from your computer screen.";
         case 4:
@@ -116,7 +125,7 @@ function getNextInstructions(slideNum, expStage){
         case 1:
           $("#network-diagram").insertAfter("#instructions" + slideNum);
           $("#network-diagram").show();
-          return "In this first task, you will memorize the locations of the images within the network structure shown below.";
+          return "In this first task, you will memorize the locations of the face images within the network structure shown below.";
         case 2:
           return "You will see an empty network structure and a bank of images at the top.";
         case 3:
@@ -140,7 +149,7 @@ function getNextInstructions(slideNum, expStage){
         case 2:
           return "Imagine you are Jack and Jill's caretaker, and you want to make sure they are playing fairly. Jill loves to cheat. Sometimes, she will choose a picture that is NOT adjacent to the previous picture. Your job is to catch whenever she tries to cheat.";
         case 3:
-          return "In this next task, you will see a series of images from the network structure you just memorized. Press 'z' whenever Jill makes a correct move and 'm' whenever she cheats.";
+          return "In this next task, you will see a series of face images from the network structure you just memorized. Press 'z' whenever Jill makes a correct move and 'm' whenever she cheats.";
         case 4:
           return "You will start with a practice task, and you will receive feedback on every trial. You need at least 80% accuracy to proceed to the main task."
         case 5:
@@ -170,7 +179,7 @@ function getNextInstructions(slideNum, expStage){
         case 2:
           return "In this task, you will use your knowledge of the network structure that you memorized. You may remember that the images in the network structure belong to two distinct groups or communities, one on the left and one on the right.";
         case 3:
-          return "In this task, you will see three images. Two of these images will belong to one of the communities, and the third image will belong to the other community.";
+          return "In this task, you will see three face images. Two of these images will belong to one of the communities, and the third image will belong to the other community.";
         case 4:
           return "Your job is to choose the image that belongs to a different community than the other two images. For example, if you think that the first and third image were in the same community, choose the second image.";
         case 5:
@@ -207,7 +216,7 @@ function getNextInstructions(slideNum, expStage){
           case 1:
             return "Great job! You have two tasks remaining, each taking about 5 minutes.";
           case 2:
-            return "In this task, you will see an image from the network you memorized. Next, a color word will appear superimposed on the image. For example, you might see the word 'RED' or 'BLUE'.";
+            return "In this task, you will see a face image from the network you memorized. Next, a color word will appear superimposed on the image. For example, you might see the word 'RED' or 'BLUE'.";
           case 3:
             return "Your job is again to indicate the font color of the word, regardless of what the word meaning is.";
           case 4:
@@ -226,7 +235,7 @@ function getNextInstructions(slideNum, expStage){
         case 1:
           return "Great job! You will now begin the final task of the experiment.";
         case 2:
-          return "This task is identical to the one you just completed. You will see an image followed by a color word, written in a particular font color.";
+          return "This task is identical to the one you just completed. You will see a face image followed by a color word, written in a particular font color.";
         case 3:
           $( getImageText(instructionImages[5]) ).insertBefore( "#instructions" + slideNum);
           return "Press 'z' if the font color is red, 'x' if it is green, 'n' if it is blue, and 'm' if it is orange, using the index and middle finger of both hands.";
