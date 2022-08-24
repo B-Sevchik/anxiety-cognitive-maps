@@ -465,3 +465,33 @@ canvas {
 #lowerText{
   font-size: 25px;
 }
+
+
+
+/* STAI css */
+#STAI_div {
+  width: 400px;
+  margin: 0 auto;
+  font-family: "Times New Roman", Times;
+}
+
+#STAI_div h1 {
+  font-size: 40px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+#STAI_instructions {
+  font-size: 5px;
+  width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#STAI_div p{
+  font-size: 20px;
+}
+
+#STAI_submit {
+  font-size: 22px;
+}
