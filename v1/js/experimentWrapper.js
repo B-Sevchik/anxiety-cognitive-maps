@@ -75,6 +75,14 @@ $(document).ready(function(){
     prepareMenu();
 
   }
+
+  let input_array = document.getElementById('STAI').querySelectorAll('input');
+  for (let inputelement = 0; inputelement < input_array.length; inputelement++) {
+    let p_element = input_array[inputelement].parentElement;
+    p_element.onclick = function(){
+      input_array[inputelement].checked = true;
+    }
+  };
 });
 
 function prepareMenu(){
@@ -119,14 +127,16 @@ function prepareMenu(){
   });
 }
 
+var STAI_vals = {}
 $(document).on("click", "#STAI_submit", function(){
 
+    STAI_vals = {}
+
     // code for submit button here
-    var STAI_vals = {}
     var input_array = document.getElementById('STAI').querySelectorAll('input');
 
     for (let inputelement = 0; inputelement < input_array.length; inputelement++) {
-      if (input_array[inputelement].checked == true) {
+      if (input_array[inputelement].checked) {
 
         STAI_vals[input_array[inputelement].name] = input_array[inputelement].value;
 
@@ -134,21 +144,22 @@ $(document).on("click", "#STAI_submit", function(){
 
     };
 
-    console.log(STAI_vals);
-    console.log(Object.keys(STAI_vals).length);
-    console.log(Object.keys(STAI_vals));
+    // console.log(STAI_vals);
+    // console.log(Object.keys(STAI_vals).length);
+    // console.log(Object.keys(STAI_vals));
 
 
 //if participant answers all questions
 if (Object.keys(STAI_vals).length == 20) {
 
-  const questions_list_array = document.getElementsByClassName("STAI_question");
-    for (let i = 1; i < questions_list_array.length+1; i++) {
-      console.log("question"+i);
-      var questionInArray = document.getElementById("STAI_question"+i);
-      questionInArray.style.color = 'black'
-    }
-    updateMainMenu(4);
+  // const questions_list_array = document.getElementsByClassName("STAI_question");
+  //   for (let i = 1; i < questions_list_array.length+1; i++) {
+  //     console.log("question"+i);
+  //     var questionInArray = document.getElementById("STAI_question"+i);
+  //     questionInArray.style.color = 'black'
+  //   }
+  $("#STAI_data").val(Object.values(STAI_vals).join(';'));
+  updateMainMenu(4);
 }
 
 //if participant does not answer all questions/skips question(s)
@@ -158,7 +169,7 @@ else if (Object.keys(STAI_vals).length < 20) {
       for (let i = 1; i < questions_list_array.length+1; i++) {
         console.log("question"+i);
         var questionInArray = document.getElementById("STAI_question"+i);
-        if (("question"+i in STAI_vals) == false) {
+        if (!("question"+i in STAI_vals)) {
           questionInArray.style.color = 'red'
         }
         else if (("question"+i in STAI_vals) == true) {
