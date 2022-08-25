@@ -133,7 +133,7 @@ $(document).on("click", "#STAI_submit", function(){
     STAI_vals = {}
 
     // code for submit button here
-    var input_array = document.getElementById('STAI').querySelectorAll('input');
+    let input_array = document.getElementById('STAI').querySelectorAll('input');
 
     for (let inputelement = 0; inputelement < input_array.length; inputelement++) {
       if (input_array[inputelement].checked) {
@@ -165,14 +165,14 @@ if (Object.keys(STAI_vals).length == 20) {
 //if participant does not answer all questions/skips question(s)
 else if (Object.keys(STAI_vals).length < 20) {
   alert("Please answer all questions.");
-  const questions_list_array = document.getElementsByClassName("STAI_question");
+  let questions_list_array = document.getElementsByClassName("STAI_question");
       for (let i = 1; i < questions_list_array.length+1; i++) {
         console.log("question"+i);
-        var questionInArray = document.getElementById("STAI_question"+i);
+        let questionInArray = document.getElementById("STAI_question"+i);
         if (!("question"+i in STAI_vals)) {
           questionInArray.style.color = 'red'
         }
-        else if (("question"+i in STAI_vals) == true) {
+        else if (("question"+i in STAI_vals)) {
           questionInArray.style.color = 'black'
         }
 
