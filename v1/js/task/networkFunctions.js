@@ -91,8 +91,14 @@ function setUpNetwork(){
   }
 
   // create network with nodes for each image
-  for (var i = 0; i < selectedImages.length; i++) {
-    taskNetwork.addNode(new Node(i + 1, selectedImages[i], selectedImages_png[i]));
+  // for (var i = 0; i < selectedImages.length; i++) {
+  //   taskNetwork.addNode(new Node(i + 1, selectedImages[i], selectedImages_png[i]));
+  // }
+  for (var i = 0; i < selected_threat_images.length; i++) {
+    taskNetwork.addNode(new Node(i + 1, selected_threat_images[i]))
+  }
+  for (var i = 0; i < selected_neutral_images.length; i++) {
+    taskNetwork.addNode(new Node(i + 1, selected_neutral_images[i]))
   }
 
   // add neighbors to objects as specified in nodeNeighbors var

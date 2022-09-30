@@ -10,6 +10,30 @@ let instructionImages = {
   5: '././images/stroopInstructions.png'
 }
 
+let neutral_images_SRCs = []
+for (var i = 1; i < 11; i++) {
+  console.log(`././images/neutral_images/picture${i}.jpg`)
+  neutral_images_SRCs.push(`././images/neutral_images/picture${i}.jpg`)
+}
+console.log(neutral_images_SRCs)
+
+let selected_neutral_images = _.sample(neutral_images_SRCs, 6)
+
+let threat_images_SRCs = []
+for (var i = 1; i < 20; i++) {
+  console.log(`././images/threat_images/pictures${i}.jpg`)
+  threat_images_SRCs.push(`././images/threat_images/picture${i}.jpg`)
+}
+console.log(threat_images_SRCs)
+let selected_threat_images = _.sample(threat_images_SRCs, 4)
+console.log(selected_threat_images)
+
+
+
+
+
+
+
 // select network images to use in task (out of 20 options)
 let imageSRCs = [];
 for (let i = 1; i <= 20; i++) {
