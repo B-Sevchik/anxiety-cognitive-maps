@@ -71,12 +71,6 @@ function experimentFlow(){
     illegalTransitionTask();
   } else if (expStage.indexOf("main4") != -1){
     oddOneOutTest();
-  } else if (expStage.indexOf("prac5") != -1){
-    stroopTaskPractice();
-  } else if (expStage.indexOf("main6") != -1){
-    stroopAssociationTask();
-  } else if (expStage.indexOf("main7") != -1) {
-    stroopTransferTask();
   } else {
     endOfExperiment();
   }

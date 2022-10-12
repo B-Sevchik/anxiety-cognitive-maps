@@ -12,42 +12,16 @@ let instructionImages = {
 
 let neutral_images_SRCs = []
 for (var i = 1; i < 11; i++) {
-  console.log(`././images/neutral_images/picture${i}.jpg`)
   neutral_images_SRCs.push(`././images/neutral_images/picture${i}.jpg`)
 }
-console.log(neutral_images_SRCs)
 
 let selected_neutral_images_SRCs = _.sample(neutral_images_SRCs, 6)
 
 let threat_images_SRCs = []
 for (var i = 1; i < 20; i++) {
-  console.log(`././images/threat_images/pictures${i}.jpg`)
   threat_images_SRCs.push(`././images/threat_images/picture${i}.jpg`)
 }
-console.log(threat_images_SRCs)
 let selected_threat_images_SRCs = _.sample(threat_images_SRCs, 4)
-console.log(selected_threat_images_SRCs)
-
-let selectedImages_unshuffled = selected_neutral_images_SRCs.concat(selected_threat_images_SRCs);
-console.log(selectedImages_unshuffled)
-let selectedImages = _.shuffle(selectedImages_unshuffled)
-console.log(selectedImages)
-
-
-
-
-
-
-
-// select network images to use in task (out of 20 options)
-// let imageSRCs = [];
-// for (let i = 1; i <= 20; i++) {
-//   imageSRCs.push(`././images/object_jpgs/Object${i}.jpg`);
-// }
-
-// randomly sample from images
-// let selectedSRCs = _.sample(imageSRCs,networkSize);
-// let unselectedSRCs = imageSRCs.filter(image => !selectedSRCs.includes(image))
 
 // load images and store in selectedImages var
 let selected_threat_images = new Array(selected_threat_images_SRCs.length);
@@ -61,6 +35,14 @@ for (var i = 0; i < selected_neutral_images.length; i++) {
   selected_neutral_images[i] = new Image();
   selected_neutral_images[i].src = selected_neutral_images_SRCs[i]
 }
+
+let selectedImages_unshuffled = selected_neutral_images.concat(selected_threat_images);
+console.log(selectedImages_unshuffled)
+let selectedImages = _.shuffle(selectedImages_unshuffled)
+console.log(selectedImages)
+
+
+
 
 // -------------------------------------------//
 //  Code for displaying images to participants

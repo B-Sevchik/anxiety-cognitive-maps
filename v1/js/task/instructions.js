@@ -4,11 +4,11 @@
 let instructions = {
   // contains the interator for each instruction block
   iterator: {
-    "main1-1": 1, "main1-2": 1, "main2": 1, "main3": 1, "main4": 1,"prac5": 1, "main6": 1, "main7": 1, "final": 1
+    "main1-1": 1, "main1-2": 1, "main2": 1, "main3": 1, "main4": 1, "final": 1
   },
   // contains the max value of each instruction iteration. iteration will STOP at max.
   max: {
-    "main1-1": 4, "main1-2": 7, "main2": 6, "main3": 4, "main4": 8,"prac5": 6, "main6": 6, "main7": 5,"final": 1
+    "main1-1": 4, "main1-2": 7, "main2": 6, "main3": 4, "main4": 8, "final": 1
   },
   // what does instruction section end with?
   // #nextSectionButton, #startExpButton, keyPressNextSection, keyPressStartTask
@@ -18,9 +18,6 @@ let instructions = {
     "main2": 'keyPressStartTask',
     "main3": 'keyPressStartTask',
     "main4": '#startExpButton',
-    "prac5": 'keyPressStartTask',
-    "main6": 'keyPressStartTask',
-    "main7": 'keyPressStartTask',
     "final": 'keyPressStartTask'
   }
 };
@@ -51,15 +48,6 @@ function navigateInstructionPath(repeat = false){
         expStage = "main4";
         break;
       case "main4":
-        expStage = "prac5";
-        break;
-      case "prac5":
-        expStage = "main6";
-        break;
-      case "main6":
-        expStage = "main7";
-        break;
-      case "main7":
         expStage = "final";
         break;
     }
@@ -74,13 +62,6 @@ function displayDefaults(stage){
       showFirst();
       $('.instruction-header').hide();
       break;
-    case "intro1":
-    case "main1":
-    case "main2":
-    case "main3":
-    case "main4":
-    case "main5":
-       // showFirst();
     default:
       showFirst();
       $('.instruction-header').show();
@@ -183,61 +164,6 @@ function getNextInstructions(slideNum, expStage){
         case 8:
           return "This task is expected to take 10 minutes.";
     }
-    case "prac5":
-      switch (slideNum){
-        case 1:
-          return "Great job! You will now begin the second half of the experiment. You will start with a short practice task.";
-        case 2:
-          return "In this task, you will see a color word (e.g., 'RED' or 'BLUE') appear on the screen. The font color of the word can either match the word's meaning (e.g., 'RED' in red font) or may not match the word's meaning (e.g., 'RED' in blue font)."
-        case 3:
-          $( getImageText(instructionImages[5]) ).insertBefore( "#instructions" + slideNum);
-          return "Your job is to indicate the FONT COLOR of the word, while ignoring what the word itself says. On your keyboard, press 'z' if the font color is red, 'x' if it is green, 'n' if it is blue, and 'm' if it is orange, using the index and middle fingers of both hands."
-        case 4:
-          return "You will need to get a least " + practiceAccCutoff + "% correct on this task in order to move onto the next section, otherwise you will need to repeat the practice."
-        case 5:
-          iterateAgain = true;
-          $( getImageText(instructionImages[2]) ).insertAfter( "#instructions" + slideNum);
-          return "Please place your fingers on the keyboard as shown. Remember to respond as quickly and as accurately as possible.";
-        case 6:
-          changeTextFormat('#instructions' + slideNum,'font-weight','bold');
-          return "Press any button to start.";
-      }
-    case "main6":
-        switch (slideNum) {
-          case 1:
-            return "Great job! You have two tasks remaining, each taking about 5 minutes.";
-          case 2:
-            return "In this task, you will see an image from the network you memorized. Next, a color word will appear superimposed on the image. For example, you might see the word 'RED' or 'BLUE'.";
-          case 3:
-            return "Your job is again to indicate the font color of the word, regardless of what the word meaning is.";
-          case 4:
-            $( getImageText(instructionImages[5]) ).insertBefore( "#instructions" + slideNum);
-            return "Press 'z' if the font color is red, 'x' if it is green, 'n' if it is blue, and 'm' if it is orange, using the index and middle finger of both hands.";
-          case 5:
-            iterateAgain = true;
-            $( getImageText(instructionImages[2]) ).insertAfter( "#instructions" + slideNum);
-            return "Please place your fingers on the keyboard as shown. Remember to respond as quickly and as accurately as possible.";
-          case 6:
-            changeTextFormat('#instructions' + slideNum,'font-weight','bold');
-            return "Press any button to start.";
-      }
-    case "main7":
-      switch (slideNum) {
-        case 1:
-          return "Great job! You will now begin the final task of the experiment.";
-        case 2:
-          return "This task is identical to the one you just completed. You will see an image followed by a color word, written in a particular font color.";
-        case 3:
-          $( getImageText(instructionImages[5]) ).insertBefore( "#instructions" + slideNum);
-          return "Press 'z' if the font color is red, 'x' if it is green, 'n' if it is blue, and 'm' if it is orange, using the index and middle finger of both hands.";
-        case 4:
-          iterateAgain = true;
-          $( getImageText(instructionImages[2]) ).insertAfter( "#instructions" + slideNum);
-          return "Please place your fingers on the keyboard as shown. Remember to respond as quickly and as accurately as possible.";
-        case 5:
-          changeTextFormat('#instructions' + slideNum,'font-weight','bold');
-          return "Press any button to start.";
-      }
     case "final":
       switch (slideNum){
         case 1:

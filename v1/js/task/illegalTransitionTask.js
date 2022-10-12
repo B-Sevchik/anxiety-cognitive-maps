@@ -1,4 +1,6 @@
 function illegalTransitionTask(){
+
+  // for data logging
   sectionType = "mainTask";
   taskName = "illegalTransitionTask";
 
