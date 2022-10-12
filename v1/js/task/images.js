@@ -17,7 +17,7 @@ for (var i = 1; i < 11; i++) {
 }
 console.log(neutral_images_SRCs)
 
-let selected_neutral_images = _.sample(neutral_images_SRCs, 6)
+let selected_neutral_images_SRCs = _.sample(neutral_images_SRCs, 6)
 
 let threat_images_SRCs = []
 for (var i = 1; i < 20; i++) {
@@ -25,8 +25,13 @@ for (var i = 1; i < 20; i++) {
   threat_images_SRCs.push(`././images/threat_images/picture${i}.jpg`)
 }
 console.log(threat_images_SRCs)
-let selected_threat_images = _.sample(threat_images_SRCs, 4)
-console.log(selected_threat_images)
+let selected_threat_images_SRCs = _.sample(threat_images_SRCs, 4)
+console.log(selected_threat_images_SRCs)
+
+let selectedImages_unshuffled = selected_neutral_images_SRCs.concat(selected_threat_images_SRCs);
+console.log(selectedImages_unshuffled)
+let selectedImages = _.shuffle(selectedImages_unshuffled)
+console.log(selectedImages)
 
 
 
@@ -35,34 +40,26 @@ console.log(selected_threat_images)
 
 
 // select network images to use in task (out of 20 options)
-let imageSRCs = [];
-for (let i = 1; i <= 20; i++) {
-  imageSRCs.push(`././images/object_jpgs/Object${i}.jpg`);
-}
+// let imageSRCs = [];
+// for (let i = 1; i <= 20; i++) {
+//   imageSRCs.push(`././images/object_jpgs/Object${i}.jpg`);
+// }
 
 // randomly sample from images
-let selectedSRCs = _.sample(imageSRCs,networkSize);
-let unselectedSRCs = imageSRCs.filter(image => !selectedSRCs.includes(image))
+// let selectedSRCs = _.sample(imageSRCs,networkSize);
+// let unselectedSRCs = imageSRCs.filter(image => !selectedSRCs.includes(image))
 
 // load images and store in selectedImages var
-let selectedImages = new Array(selectedSRCs.length);
-for (var i = 0; i < selectedImages.length; i++) {
-  selectedImages[i] = new Image();
-  selectedImages[i].src = selectedSRCs[i];
+let selected_threat_images = new Array(selected_threat_images_SRCs.length);
+for (var i = 0; i < selected_threat_images.length; i++) {
+  selected_threat_images[i] = new Image();
+  selected_threat_images[i].src = selected_threat_images_SRCs[i]
 }
 
-// save unselected images for later (transfer test)
-let unselectedImages = new Array(unselectedSRCs.length);
-for (var i = 0; i < unselectedImages.length; i++) {
-  unselectedImages[i] = new Image();
-  unselectedImages[i].src = unselectedSRCs[i];
-}
-
-// also create png versions of selected srcs
-let selectedImages_png = new Array(selectedImages.length);
-for (var i = 0; i < selectedImages_png.length; i++) {
-  selectedImages_png[i] = new Image();
-  selectedImages_png[i].src = "././images/object_pngs/" + fileOnly(selectedImages[i].src).split(".")[0] + ".png";
+let selected_neutral_images = new Array(selected_neutral_images_SRCs.length);
+for (var i = 0; i < selected_neutral_images.length; i++) {
+  selected_neutral_images[i] = new Image();
+  selected_neutral_images[i].src = selected_neutral_images_SRCs[i]
 }
 
 // -------------------------------------------//
@@ -105,19 +102,22 @@ function createImageTable(){
   imageTableDiv.appendChild(imageTable);
 }
 
-function prepareNetworkDiagram(){
-  createSVG("svg1","#network-container-sm", 450*imageScale + 'px', 850*imageScale + 'px');
-  drawSVGLines("svg1", "plot", "#network-container-sm");
+// function prepareNetworkDiagram(){
+//   createSVG("svg1","#network-container-sm", 450*imageScale + 'px', 850*imageScale + 'px');
+//   drawSVGLines("svg1", "plot", "#network-container-sm");
+//
+//   // fill images into network diagram
+//
 
-  // fill images into network diagram
-  for (var i = 0; i < 10; i++) {
-    let imageDiv = new Image;
-    imageDiv.src = selectedImages[i].src
-    imageDiv.width = 100 * imageScale; //
-    imageDiv.id = "img" + i;
-    document.getElementById("plot"+i).append(imageDiv);
-  }
-}
+
+//   for (var i = 0; i < 10; i++) {
+//     let imageDiv = new Image;
+//     imageDiv.src = [i].src
+//     imageDiv.width = 100 * imageScale; //
+//     imageDiv.id = "img" + i;
+//     document.getElementById("plot"+i).append(imageDiv);
+//   }
+// }
 
 function createSVG(id, location, h, w, before = true){
   // add svg (for drawing lines)

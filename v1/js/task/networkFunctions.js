@@ -20,11 +20,10 @@ class Network {
 }
 
 class Node {
-  constructor(i, imageJpg, imagePng) {
+  constructor(i, imageJpg, isThreat) {
     this.name = `Node${i}`;
     this.index = i;
     this.img = imageJpg;
-    this.img_png = imagePng;
     this.neighbors = [];
     this.coord = {x: NaN, y: NaN};
     this.rad = 7;
@@ -34,6 +33,7 @@ class Node {
     this.communityNumber = NaN;
     this.associatedWithTask = false;
     this.isBoundaryNode = false;
+    this.threat = isThreat;
   }
 
   addNeighbor(newNeighbor) {
@@ -94,12 +94,47 @@ function setUpNetwork(){
   // for (var i = 0; i < selectedImages.length; i++) {
   //   taskNetwork.addNode(new Node(i + 1, selectedImages[i], selectedImages_png[i]));
   // }
-  for (var i = 0; i < selected_threat_images.length; i++) {
-    taskNetwork.addNode(new Node(i + 1, selected_threat_images[i]))
+  // for (var i = 0; i < selected_threat_images.length; i++) {
+  //   taskNetwork.addNode(new Node(i + 1, selected_threat_images[i]))
+  // }
+  // for (var i = 0; i < selected_neutral_images.length; i++) {
+  //   taskNetwork.addNode(new Node(i + 1, selected_neutral_images[i]))
+  // }
+  let imagePairings = {}
+
+  // left half of network (two are threat)
+  shuffled_indices = shuffle([1,2,3,4])
+  imagePairings[shuffled_indices[0]] = "threat"
+  imagePairings[shuffled_indices[1]] = "threat"
+  imagePairings[shuffled_indices[2]] = "neutral"
+  imagePairings[shuffled_indices[3]] = "neutral"
+
+  // right half of network (two are threat)
+  shuffled_indices = shuffle([7, 8, 9, 10])
+  imagePairings[shuffled_indices[0]] = "threat"
+  imagePairings[shuffled_indices[1]] = "threat"
+  imagePairings[shuffled_indices[2]] = "neutral"
+  imagePairings[shuffled_indices[3]] = "neutral"
+
+  // boundary nodes, both neutral
+  imagePairings[5] = "neutral"
+  imagePairings[6] = "neutral"
+
+  //loop from 1-10
+  let threatIterator = 0;
+  let neutralIterator = 0;
+  for (var i = 1; i < 11; i++) {
+    if (imagePairings[i] == 'threat') {
+      taskNetwork.addNode(new Node(i, selected_threat_images[threatIterator], true))
+      threatIterator++
+    }
+    else {
+      taskNetwork.addNode(new Node(i, selected_neutral_images[neutralIterator], false))
+      neutralIterator++
+    }
   }
-  for (var i = 0; i < selected_neutral_images.length; i++) {
-    taskNetwork.addNode(new Node(i + 1, selected_neutral_images[i]))
-  }
+
+  console.log(taskNetwork)
 
   // add neighbors to objects as specified in nodeNeighbors var
   taskNetwork.nodes.forEach((node, i) => {
