@@ -264,3 +264,12 @@ function adjustAccuracy(){
 function createTransitionType(){
   prevTransition = transitionType;
 }
+
+function hideImageTable(){
+  document.getElementById("dragImageTable").remove();
+  document.getElementById("picture-container").style.display = "none";
+}
+
+function showSubmitButton(taskButton){
+  $(taskButton).show();
+}
