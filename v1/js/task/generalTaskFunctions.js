@@ -234,3 +234,23 @@ function chooseFirstActiveNode(){
 function hideInstructions(){
   $('#instructionsDiv').hide();
 }
+
+function rememberPreviousNode(){
+  prevNode = activeNode;
+}
+
+function resetActiveNode(){
+  activeNode.reset();
+}
+
+function chooseNewNode(){
+  // randomly choose a new node if legal or illegal
+  if (legalIllegalArray[trialCount - 1] == "i") {
+    transitionType = "i"; //illegal transition
+    activeNode = _.sample(taskNetwork.nodes.filter(node => !activeNode.neighbors.includes(node) && node != activeNode),1)[0];
+    // console.log("illegal - press space!");
+  } else {
+    transitionType = "l"; //legal (random) transition
+    activeNode = _.sample(activeNode.neighbors,1)[0];
+  }
+}
