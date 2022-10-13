@@ -244,7 +244,7 @@ function resetActiveNode(){
 }
 
 function chooseNewNode(){
-  // randomly choose a new node if legal or illegal
+  // randomly choose a new node if legal or illegal (don't allow consecutive illegal)
   if (legalIllegalArray[trialCount - 1] == "i") {
     transitionType = "i"; //illegal transition
     activeNode = _.sample(taskNetwork.nodes.filter(node => !activeNode.neighbors.includes(node) && node != activeNode),1)[0];
@@ -253,4 +253,14 @@ function chooseNewNode(){
     transitionType = "l"; //legal (random) transition
     activeNode = _.sample(activeNode.neighbors,1)[0];
   }
+}
+
+function adjustAccuracy(){
+  if (!partResp) {acc = 0}
+  if (trialCount == 1) {acc = 1}
+  accCount = accCount + acc;
+}
+
+function createTransitionType(){
+  prevTransition = transitionType;
 }

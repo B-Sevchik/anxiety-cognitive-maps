@@ -2,33 +2,19 @@ function practiceIllegalTransitionTask(){
   sectionType = "pracTask";
   taskName = "practiceTransitionTask";
 
-  // declare task vars
-  earlyReleaseExperiment = false;
-  playSoundsExperiment = false;
-  feedbackShown = false;
-  document.body.style.cursor = 'none';
+  hideCursor();
 
-  // hide instructions and show canvas
-  $('#instructionsDiv').hide();
-  $("#navButtons").hide();
-  canvas.style.display = "inline-block";
-  if (showNetworkWalk == true) {ntCanvas.style.display = "inline-block";}
-  $(".canvasas").show();
+  hideInstructions();
+  displayCanvases();
 
-  // set up first active node
   createActiveNode();
-
-  // prepare practice task array (illegal versus legal)
   legalIllegalArray = preparePracticeArray();
-  // console.log(legalIllegalArray);
   transitionType = legalIllegalArray[trialCount-1];
 
-  // set taskFunc so countdown goes to right task
-  taskFunc = runIllegalPractice;
   transitionFunc = practiceTransition;
 
   // start task after countdown
-  countDown(3);
+  countDown(runIllegalPractice, 3);
 }
 
 function runIllegalPractice(){
@@ -76,30 +62,17 @@ function practiceTransition(){
 
   } else {
 
-    // adjust accuracy
-    if (!partResp) {acc = 0}
-    if (trialCount == 1) {acc = 1}
-    accCount = accCount + acc;
+    adjustAccuracy();
 
-    // log data from previous trial
-    data.push([sectionType, taskName, trialCount, blockTrialCount, block, NaN, stimOnset, respOnset, respTime, acc, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN,fileOnly(activeNode.img.src), activeNode.name, activeNode.index, activeNode.communityNumber, activeNode.community, activeNode.isBoundaryNode ? "b" : "i", transitionType, isCommunityTransition() ? 1 : 0, partResp, missedSkip ? 0 : 1, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN, NaN ]);
-    console.log(data);
+    logIllegalTransitionData();
+
 
     // remember where we just were
-    prevNode = activeNode;
-    activeNode.reset();
-    prevTransition = transitionType;
+    rememberPreviousNode();
+    resetActiveNode();
+    createTransitionType();
 
-    // randomly choose a new node (can be illegal or legal transition)
-    // don't allow for consecutive illegal transitions
-    if (legalIllegalArray[trialCount] == "i") {
-      transitionType = "i"; //illegal transition
-      activeNode = _.sample(taskNetwork.nodes.filter(node => !activeNode.neighbors.includes(node) && node != activeNode),1)[0];
-      // console.log("illegal - press space!");
-    } else {
-      transitionType = "l"; //legal (random) transition
-      activeNode = _.sample(activeNode.neighbors,1)[0];
-    }
+    chooseNewNode();
 
     activeNode.activate();
     trialHistory.push(activeNode.name);
