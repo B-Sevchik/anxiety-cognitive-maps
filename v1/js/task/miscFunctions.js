@@ -42,3 +42,7 @@ function displayCanvases(){
   if (showNetworkWalk == true) {ntCanvas.style.display = "inline-block";}
   $(".canvasas").show();
 }
+
+function setImageSize(){
+  let imageSize = 150, imageScale = 0.6;
+}
