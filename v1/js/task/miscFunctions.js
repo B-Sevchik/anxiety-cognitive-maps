@@ -32,3 +32,13 @@ function multinomialSample(sampleArr, probArr){
     }
   }
 }
+
+function hideCursor(){
+  document.body.style.cursor = 'none';
+}
+
+function displayCanvases(){
+  canvas.style.display = "inline-block";
+  if (showNetworkWalk == true) {ntCanvas.style.display = "inline-block";}
+  $(".canvasas").show();
+}

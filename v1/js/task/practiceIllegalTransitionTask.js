@@ -16,9 +16,7 @@ function practiceIllegalTransitionTask(){
   $(".canvasas").show();
 
   // set up first active node
-  activeNode = _.sample(taskNetwork.nodes,1)[0];
-  activeNode.activate();
-  trialHistory.push(activeNode.name);
+  createActiveNode();
 
   // prepare practice task array (illegal versus legal)
   legalIllegalArray = preparePracticeArray();

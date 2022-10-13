@@ -4,34 +4,14 @@ function illegalTransitionTask(){
   sectionType = "mainTask";
   taskName = "illegalTransitionTask";
 
-  // declare task vars
-  earlyReleaseExperiment = false;
-  playSoundsExperiment = true;
-  feedbackShown = false;
-  document.body.style.cursor = 'none';
-
-  // hide instructions and show canvas
-  $('#instructionsDiv').hide();
-  $("#navButtons").hide();
-  canvas.style.display = "inline-block";
-  if (showNetworkWalk == true) {ntCanvas.style.display = "inline-block";}
-  $(".canvasas").show();
-
-  // set up first active node
-  activeNode = _.sample(taskNetwork.nodes,1)[0];
-  activeNode.activate();
-  trialHistory.push(activeNode.name);
-  transitionType = legalIllegalArray[trialCount-1];
-
-  // get legalIllagalArray
+  hideCursor();
+  hideInstructions()
+  displayCanvases();
+  chooseFirstActiveNode();
   legalIllegalArray = prepareLegalIllegalArray();
 
-  // set taskFunc so countdown goes to right task
-  taskFunc = runIllegalTransition;
-  transitionFunc = networkTransition;
-
   // start task after countdown
-  countDown(3);
+  countDown(runIllegalTransition, 3);
 }
 
 function runIllegalTransition(){

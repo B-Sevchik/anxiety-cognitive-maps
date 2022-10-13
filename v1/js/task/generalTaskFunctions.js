@@ -1,4 +1,4 @@
-function countDown(seconds, cdSpeed = "normal"){
+function countDown(functionToCall, seconds, cdSpeed = "normal"){
   let timePerCycle = (cdSpeed == "fast") ? 500 : 1000;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "black";
@@ -7,7 +7,7 @@ function countDown(seconds, cdSpeed = "normal"){
     ctx.fillText(seconds,canvas.width/2,canvas.height/2)
     setTimeout(function(){countDown(seconds - 1, cdSpeed)},timePerCycle);
   } else {
-    taskFunc();
+    functionToCall();
   }
 }
 
@@ -222,4 +222,15 @@ function practiceFeedback(accuracy){
     repeatNecessary = false;
 
   }
+}
+
+function chooseFirstActiveNode(){
+  activeNode = _.sample(taskNetwork.nodes,1)[0];
+  activeNode.activate();
+  trialHistory.push(activeNode.name);
+  transitionType = legalIllegalArray[trialCount-1];
+}
+
+function hideInstructions(){
+  $('#instructionsDiv').hide();
 }
