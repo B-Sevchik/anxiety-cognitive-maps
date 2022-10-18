@@ -12,15 +12,19 @@ let instructionImages = {
 
 let n_neutral_images_in_bank = 10
 let n_neutral_images_in_network = 6
-let selected_neutral_SRCs = getImageSRCs(n_neutral_images_in_bank, n_neutral_images_in_network, `././images/neutral_images/picture${i}.jpg`)
+let selected_neutral_SRCs = getImageSRCs(n_neutral_images_in_bank, n_neutral_images_in_network, 'neutral_images')
+console.log(selected_neutral_SRCs)
 
 let n_threat_images_in_bank = 19
 let n_threat_images_in_network = 4
-let selected_threat_SRCs = getImageSRCs(n_threat_images_in_bank, n_threat_images_in_network, `././images/threat_images/picture${i}.jpg`)
+let selected_threat_SRCs = getImageSRCs(n_threat_images_in_bank, n_threat_images_in_network, 'threat_images')
+console.log(selected_threat_SRCs)
 
 // load images and store in selectedImages var
 let selected_threat_images = convertToImages(selected_threat_SRCs)
 let selected_neutral_images = convertToImages(selected_neutral_SRCs)
+console.log(selected_threat_images)
+console.log(selected_neutral_images)
 
 
 let all_selected_images_unshuffled = selected_neutral_images.concat(selected_threat_images);
@@ -244,9 +248,10 @@ function drawRect(x, y, w, h, svg){
 function getImageSRCs(images_in_bank_num, images_in_network_num, image_path){
   let src_arr = []
   for (var i = 1; i < images_in_bank_num+1; i++) {
-    src_arr.push(image_path)
-  let selected_src_arr = _.sample(src_arr, images_in_network_num)
+    src_arr.push(`././images/{image_path}/picture${i}.jpg`)
   }
+  let selected_src_arr = _.sample(src_arr, images_in_network_num)
+  return selected_src_arr
 }
 
 function convertToImages(selected_images_SRCs){
@@ -255,4 +260,5 @@ function convertToImages(selected_images_SRCs){
     selected_images[i] = new Image();
     selected_images[i].src = selected_images_SRCs[i]
   }
+  return selected_images
 }
