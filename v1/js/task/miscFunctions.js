@@ -43,6 +43,20 @@ function displayCanvases(){
   $(".canvasas").show();
 }
 
+function setUpCanvases(){
+  // set up main display canvas
+  canvas = document.getElementById('taskCanvas');
+  ctx = canvas.getContext('2d');
+  ctx.textBaseline= "middle";
+  ctx.textAlign="center";
+
+  // set up canvas for showing network walk
+  ntCanvas = document.getElementById('networkCanvas');
+  ntCtx = networkCanvas.getContext('2d');
+  ntCtx.textBaseline= "middle";
+  ntCtx.textAlign="center";
+}
+
 function setImageSize(){
   let imageSize = 150, imageScale = 0.6;
 }

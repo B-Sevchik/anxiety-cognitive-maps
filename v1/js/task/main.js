@@ -17,24 +17,15 @@ let illegalProbability = 0.2; //frequency of illegal transitions
 let correctTime = 1000;
 let incorrectTime = 3000;
 let practiceAccCutoff = 80;
-// stroop related
-let imagePreStroopInterval = 500;
-let fixInterval = (speed == "fast") ? 5 : 500;
-let stroopStimInterval = (speed == "fast") ? 5 : 1500; //2000
-let stroopITI = (speed == "fast") ? 1 : 1000; //1200
-let nStroopAssociationTrials = 192;
-let nTransferTrials = 96;
-let nNovelNodes = 6;
 
 // task variables
 let taskNetwork = new Network(), activeNode, prevNode, transitionType;
 let taskFunc, transitionFunc, stimTimeout, feedbackShown, missedSkip;
-let trialHistory = [], earlyReleaseExperiment = false, playSoundsExperiment = false;
+let trialHistory = [];
 let actionArr, stimArr, switchRepeatArr, buffer, stimSet, stroopOnset, trialIsRepeat, trialIsNA, switchType, accArr;
 let canvas, ctx, ntCanvas, ntCtx; //canvas variables
 let data=[], taskName, trialCount, blockTrialCount, acc, accCount, stimOnset, respOnset, respTime, block, partResp, runStart, legalIllegalArray = [], trialType, taskSet; //variables for data logging
 let breakOn = false, repeatNecessary = false; //variables for block breaks and repeating practie blocks
-let mistakeSound = new Audio('././sounds/mistakeSoundShort.m4a'); //default error buzz
 let sectionStart, sectionEnd, sectionType, sectionTimer; //for logging non experimental sections (instruction and break screens)
 let keyListener = 0;
 /*  key press listener values:
@@ -79,121 +70,105 @@ function experimentFlow(){
 // Experiment starts here
 function startExperiment(){
 
-  // set up main display canvas
-  canvas = document.getElementById('taskCanvas');
-  ctx = canvas.getContext('2d');
-  ctx.textBaseline= "middle";
-  ctx.textAlign="center";
-
-  // set up canvas for showing network walk
-  ntCanvas = document.getElementById('networkCanvas');
-  ntCtx = networkCanvas.getContext('2d');
-  ntCtx.textBaseline= "middle";
-  ntCtx.textAlign="center";
+  setUpCanvases();
 
   // create key press listener
-  $("body").keypress(function(event){
-    if (keyListener == 0) { //bad press
-      keyListener = 3;
-    } else if (keyListener == 1) { //good press
-      keyListener = 2; //await key up
+  $("body").keypress(function(event){keyPressFunction(event)});
 
-      // accuracy
-      partResp = event.which;
-      // reaction time
-      respOnset = new Date().getTime() - runStart;
-      respTime = respOnset - stimOnset;
-
-      if (taskName == "practiceTransitionTask") {
-        if (transitionType == "l") {
-          // partResp will = 90 or 122 if 'z' pressed
-          if ([90, 122].indexOf(partResp) != -1) {
-            acc = 1;
-          } else {
-            acc = 0;
-          }
-        } else if (transitionType == "i") {
-          // partResp will = 77 or 109 if 'z' pressed
-          if ([77, 109].indexOf(partResp) != -1) {
-            acc = 1;
-          } else {
-            acc = 0;
-          }
-        }
-      } else if (taskName.indexOf("stroop") != -1) {
-        acc = (currentTaskArray[trialCount-1][3].includes(partResp)) ? 1 : 0;
-        if (acc) {
-          accCount++;
-        }
-        respTime = respOnset - stroopOnset;
-      }
-    }
-  });
-
-// create key release listener
-    $("body").keyup(function(event){
-    if (keyListener == 2 ) { //good press release
-      if (taskName == "practiceTransitionTask") {
-        transitionFunc();
-      }
-      if (earlyReleaseExperiment) {
-        clearTimeout(stimTimeout);
-        transitionFunc();
-      }
-      keyListener = 0;
-    } else if (keyListener == 3) { //resets bad press to 0
-      keyListener = 0;
-    } else if (keyListener == 4) { //screen size warning
-      keyListener = 0;
-      countDown(3, "fast");
-    } else if (keyListener == 5) { //press button to start task (instructions)
-      keyListener = 0;
-      // log data
-      sectionEnd = new Date().getTime() - runStart;
-      logSectionData();
-      // go to next experiment
-      keyListener = 0;
-      experimentFlow();
-    } else if (keyListener == 6) { //navigates from task feedback to instructions (handles repeats)
-      keyListener = 0;
-      // log data
-      sectionEnd = new Date().getTime() - runStart;
-      logSectionData();
-      // go to instructions
-      navigateInstructionPath(repeatNecessary);
-    } else if (keyListener == 7) { //block break screen
-      keyListener = 0;
-      clearInterval(sectionTimer);
-      logSectionData();
-      // increment block
-      block++;
-      blockTrialCount = 1;
-
-      // log data
-      logSectionData();
-
-      // resume task
-      keyListener = 0; sectionType = "mainTask";
-      countDown(3);
-    }
-  });
-
-  //set up navButtons
-  $(document).on("click", "#navNetworkLearning", function(){
-    expStage = "main1";
-    runInstructions();
-  });
-
-  $(document).on("click", "#navOddOneOut", function(){
-    expStage = "main3";
-    runInstructions();
-  });
+  // create key release listener
+  $("body").keyup(function(event){keyUpFunction(event)});
 
   // having set up all the various key and button listeners, start task
   runStart = new Date().getTime();
   setUpNetwork();
+  setImageSize();
   // prepareNetworkDiagram();
   // $("#network-diagram").hide();
   runInstructions();
 
+}
+
+function keyPressFunction(event){
+  if (keyListener == 0) { //bad press
+    keyListener = 3;
+  } else if (keyListener == 1) { //good press
+    keyListener = 2; //await key up
+
+    // accuracy
+    partResp = event.which;
+    // reaction time
+    respOnset = new Date().getTime() - runStart;
+    respTime = respOnset - stimOnset;
+
+    if (taskName == "practiceTransitionTask") {
+      if (transitionType == "l") {
+        // partResp will = 90 or 122 if 'z' pressed
+        if ([90, 122].indexOf(partResp) != -1) {
+          acc = 1;
+        } else {
+          acc = 0;
+        }
+      } else if (transitionType == "i") {
+        // partResp will = 77 or 109 if 'z' pressed
+        if ([77, 109].indexOf(partResp) != -1) {
+          acc = 1;
+        } else {
+          acc = 0;
+        }
+      }
+    } else if (taskName.indexOf("stroop") != -1) {
+      acc = (currentTaskArray[trialCount-1][3].includes(partResp)) ? 1 : 0;
+      if (acc) {
+        accCount++;
+      }
+      respTime = respOnset - stroopOnset;
+    }
+  }
+}
+
+function keyUpFunction(event){
+  if (keyListener == 2 ) { //good press release
+    if (taskName == "practiceTransitionTask") {
+      transitionFunc();
+    }
+    if (earlyReleaseExperiment) {
+      clearTimeout(stimTimeout);
+      transitionFunc();
+    }
+    keyListener = 0;
+  } else if (keyListener == 3) { //resets bad press to 0
+    keyListener = 0;
+  } else if (keyListener == 4) { //screen size warning
+    keyListener = 0;
+    countDown(3, "fast");
+  } else if (keyListener == 5) { //press button to start task (instructions)
+    keyListener = 0;
+    // log data
+    sectionEnd = new Date().getTime() - runStart;
+    logSectionData();
+    // go to next experiment
+    keyListener = 0;
+    experimentFlow();
+  } else if (keyListener == 6) { //navigates from task feedback to instructions (handles repeats)
+    keyListener = 0;
+    // log data
+    sectionEnd = new Date().getTime() - runStart;
+    logSectionData();
+    // go to instructions
+    navigateInstructionPath(repeatNecessary);
+  } else if (keyListener == 7) { //block break screen
+    keyListener = 0;
+    clearInterval(sectionTimer);
+    logSectionData();
+    // increment block
+    block++;
+    blockTrialCount = 1;
+
+    // log data
+    logSectionData();
+
+    // resume task
+    keyListener = 0; sectionType = "mainTask";
+    countDown(3);
+  }
 }

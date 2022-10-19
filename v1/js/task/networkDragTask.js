@@ -1,5 +1,4 @@
 let trialAttempts = 0, consecutiveCorrectOnFirstTryTrials = 0;
-setImageSize();
 function networkDragTask(){
   sectionType = "mainTask";
   taskName = "networkDragTask";
