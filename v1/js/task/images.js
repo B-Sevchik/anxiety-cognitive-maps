@@ -24,7 +24,7 @@ let selected_neutral_images = convertToImages(selected_neutral_SRCs)
 
 
 let all_selected_images_unshuffled = selected_neutral_images.concat(selected_threat_images);
-let all_selected_images = _.shuffle(all_selected_images_unshuffled)
+let selectedImages = _.shuffle(all_selected_images_unshuffled)
 
 // -------------------------------------------//
 //  Code for displaying images to participants

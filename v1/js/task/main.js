@@ -27,6 +27,7 @@ let canvas, ctx, ntCanvas, ntCtx; //canvas variables
 let data=[], taskName, trialCount, blockTrialCount, acc, accCount, stimOnset, respOnset, respTime, block, partResp, runStart, legalIllegalArray = [], trialType, taskSet; //variables for data logging
 let breakOn = false, repeatNecessary = false; //variables for block breaks and repeating practie blocks
 let sectionStart, sectionEnd, sectionType, sectionTimer; //for logging non experimental sections (instruction and break screens)
+let imageSize = 150, imageScale = 0.6;
 let keyListener = 0;
 /*  key press listener values:
       0: No key press expected/needed => do nothing. KL => 3
@@ -81,7 +82,6 @@ function startExperiment(){
   // having set up all the various key and button listeners, start task
   runStart = new Date().getTime();
   setUpNetwork();
-  setImageSize();
   // prepareNetworkDiagram();
   // $("#network-diagram").hide();
   runInstructions();
@@ -125,6 +125,14 @@ function keyPressFunction(event){
     }
   }
 }
+
+// function keyUpFunction(event){
+//   switch(keyListener){
+//     case ""
+//   }
+// }
+
+
 
 function keyUpFunction(event){
   if (keyListener == 2 ) { //good press release

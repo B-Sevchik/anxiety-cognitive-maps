@@ -95,8 +95,6 @@ function getNextInstructions(slideNum, expStage){
     case "main1-2":
       switch (slideNum){
         case 1:
-          $("#network-diagram").insertAfter("#instructions" + slideNum);
-          $("#network-diagram").show();
           return "In this first task, you will memorize the locations of the images within the network structure shown below.";
         case 2:
           return "You will see an empty network structure and a bank of images at the top.";

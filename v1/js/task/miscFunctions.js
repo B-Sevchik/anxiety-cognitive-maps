@@ -56,7 +56,3 @@ function setUpCanvases(){
   ntCtx.textBaseline= "middle";
   ntCtx.textAlign="center";
 }
-
-function setImageSize(){
-  let imageSize = 150, imageScale = 0.6;
-}
