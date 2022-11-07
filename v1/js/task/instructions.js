@@ -95,7 +95,7 @@ function getNextInstructions(slideNum, expStage){
     case "main1-2":
       switch (slideNum){
         case 1:
-          return "In this first task, you will memorize the locations of the images within the network structure shown below.";
+          return "In this first task, you will memorize the locations of the images within a network structure.";
         case 2:
           return "You will see an empty network structure and a bank of images at the top.";
         case 3:
@@ -108,7 +108,7 @@ function getNextInstructions(slideNum, expStage){
           return "You will repeat this process until you have learned the network structure. The task is expected to take approximately 10 minutes, but varies depending on your accuracy.";
         case 7:
           changeTextFormat('#instructions' + slideNum,'font-weight','bold');
-          return "Take a minute to familiarize yourself with the network structure above before beginning the experiment.";
+          return "Press the Start Experiment button when you are ready to begin the task.";
       }
     case "main2":
       switch (slideNum){
@@ -239,26 +239,19 @@ function runInstructions(){
 
   // code for click startExperiment button
   $(document).on('click', '#startExpButton', function(){
-    let confirm = true;
-    if (expStage == "main1-2" && Boolean(window.confirm)) {
-      confirm = window.confirm("Are you sure you are ready to proceed? Remember to review the image network before proceeding. You will be expected to reproduce it from memory.");
-    }
+    //update data logger on time spent in section
+    sectionEnd = new Date().getTime() - runStart;
+    logSectionData();
 
-    if (confirm) {
-      // update data logger on time spent in section
-      sectionEnd = new Date().getTime() - runStart;
-      logSectionData();
+    $('#instructionsDiv').hide();
+    $('#startExpButton').hide();
+    clearInsertedContent();
 
-      $('#instructionsDiv').hide();
-      $('#startExpButton').hide();
-      clearInsertedContent();
-
-      // clear all button press listeners
-      $(document).off("click","#nextInstrButton");
-      $(document).off("click","#startExpButton");
-      $(document).off("click","#nextSectionButton");
-      experimentFlow();
-    }
+    // clear all button press listeners
+    $(document).off("click","#nextInstrButton");
+    $(document).off("click","#startExpButton");
+    $(document).off("click","#nextSectionButton");
+    experimentFlow();
   });
 
   $(document).on('click', '#nextSectionButton', function(){
