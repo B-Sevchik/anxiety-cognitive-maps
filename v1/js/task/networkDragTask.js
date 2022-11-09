@@ -47,18 +47,6 @@ function resetNetwork(){
   })
 }
 
-// node_name: "slot1" or "slot2"
-// node_position integer between 0 and 9. indexes the taskNetwork variable
-function checkAnswer(slot_name, node_position){
-  // this function runs when submit is hit. checks if answers are correct.
-    if (document.getElementById(slot_name).childNodes[0].src == taskNetwork.nodes[node_position].img.src) {
-      return true;
-    }
-    else {
-      return false;
-    }
-}
-
 function correctlyFill(){
   for (var i = 0; i < 10; i++) {
     let imageDiv = new Image;
@@ -66,7 +54,7 @@ function correctlyFill(){
     imageDiv.width = imageSize * imageScale; //
     imageDiv.draggable = true;
     imageDiv.id = "drag" + i;
-    imageDiv.ondragstart = function(){drag(event);}
+    imageDiv.ondragstart = function(){drag(event)}
     document.getElementById("slot"+i).append(imageDiv);
   }
 
@@ -159,7 +147,7 @@ function checkIfImageBoxEmpty(){
       $("#networkDragCheckAnswer").show();
     }
   } else {
-    $("#networkDragCheckAnswer").hide();
+    $("#networkDragCheckAnswer").show();
   }
 }
 
@@ -180,9 +168,24 @@ function setUpCheckAnswerKeyPress(){
       let nCorrect = 0;
       let anyIncorrect = false;
       let slotDict = {}
+
+      // loop through all the slots in the drag task
       for (var i = 0; i < 10; i++) {
-        slotDict["slot"+i] = checkAnswer("slot"+i,i) ? 1 : 0;
-        if (checkAnswer("slot"+i,i)) {
+        // src of the image in this slot
+        let curr_src = document.getElementById("slot"+i).childNodes[0].src;
+
+        // node of image that should be in this slot
+        let correct_node = taskNetwork.nodes[i];
+
+        // create sub dictionary for this slot
+        slotDict["slot"+i] = {}
+        slotDict["slot"+i]['current_src'] = fileOnly(curr_src)
+        slotDict["slot"+i]['current_type'] = curr_src.indexOf("threat") == -1 ? "neutral" : "threat"
+        slotDict["slot"+i]['correct_src'] = fileOnly(correct_node.img.src)
+        slotDict["slot"+i]['correct_type'] = correct_node.threat ? "threat" : "neutral"
+        slotDict["slot"+i]['accuracy'] = curr_src == correct_node.img.src ? 1 : 0;
+
+        if (curr_src == correct_node.img.src) {
           nCorrect++;
           document.getElementById("slot"+i).style.borderWidth = "2px";
           document.getElementById("slot"+i).style.borderColor = "#00ff00" //green
@@ -192,7 +195,6 @@ function setUpCheckAnswerKeyPress(){
           document.getElementById("slot"+i).style.borderColor = "#ff0000" //red
         }
       }
-      // console.log(slotDict);
 
       // if none are incorrect, reveal next trial button
       if (!anyIncorrect) {
@@ -200,7 +202,7 @@ function setUpCheckAnswerKeyPress(){
         $("#networkDragCheckAnswer").hide();
       }
 
-      logDragTaskData();
+      logDragTaskData(nCorrect, slotDict);
   });
 }
 
