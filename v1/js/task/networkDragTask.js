@@ -1,5 +1,4 @@
-let trialAttempts = 0, consecutiveCorrectOnFirstTryTrials = 0, nCorrect = 0;
-let slotDict = {};
+let trialAttempts = 0, consecutiveCorrectOnFirstTryTrials = 0,
 function networkDragTask(){
   sectionType = "mainTask";
   taskName = "networkDragTask";
@@ -174,15 +173,17 @@ function displayNetworkDragTask(){
 }
 
 function setUpCheckAnswerKeyPress(){
-  anyIncorrect = false
   $(document).on("click", "#networkDragCheckAnswer", function(){
       respOnset = new Date().getTime() - runStart;
       trialAttempts++;
       // color images if correct or incorrect
+      let nCorrect = 0;
+      let anyIncorrect = false;
+      let slotDict = {}
       for (var i = 0; i < 10; i++) {
         slotDict["slot"+i] = checkAnswer("slot"+i,i) ? 1 : 0;
         if (checkAnswer("slot"+i,i)) {
-          nCorrect = nCorrect + 1;
+          nCorrect++;
           document.getElementById("slot"+i).style.borderWidth = "2px";
           document.getElementById("slot"+i).style.borderColor = "#00ff00" //green
         } else {
@@ -192,8 +193,6 @@ function setUpCheckAnswerKeyPress(){
         }
       }
       // console.log(slotDict);
-      // console.log(anyIncorrect)
-
 
       // if none are incorrect, reveal next trial button
       if (!anyIncorrect) {
