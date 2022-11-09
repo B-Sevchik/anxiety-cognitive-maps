@@ -156,10 +156,11 @@ function checkIfImageBoxEmpty(){
       document.getElementById("dragImageTable").remove();
       document.getElementById("picture-container").style.display = "none";
       // show check answer button
+
       $("#networkDragCheckAnswer").show();
     }
   } else {
-    $("#networkDragCheckAnswer").show();
+    $("#networkDragCheckAnswer").hide();
   }
 }
 
@@ -191,12 +192,17 @@ function setUpCheckAnswerKeyPress(){
         }
       }
       // console.log(slotDict);
-      console.log(anyIncorrect)
+      // console.log(anyIncorrect)
+
 
       // if none are incorrect, reveal next trial button
       if (!anyIncorrect) {
         $("#networkDragNextTrial").show();
         $("#networkDragCheckAnswer").hide();
+      }
+      if (anyIncorrect) {
+        resetNetwork();
+        networkDragTrial();
       }
 
       logDragTaskData();
