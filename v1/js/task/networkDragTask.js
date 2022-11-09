@@ -200,10 +200,6 @@ function setUpCheckAnswerKeyPress(){
         $("#networkDragNextTrial").show();
         $("#networkDragCheckAnswer").hide();
       }
-      if (anyIncorrect) {
-        resetNetwork();
-        networkDragTrial();
-      }
 
       logDragTaskData();
   });
@@ -246,7 +242,6 @@ function drop(event) {
 
   // check if data recipient is an empty div or an image
   if (event.target.tagName == "DIV") {
-    console.log("DIV");
     // if div, just append
     event.target.appendChild(data);
 
@@ -256,50 +251,56 @@ function drop(event) {
     }
 
   } else {
+    //there was already an image in the box
 
     let oldDiv, newDiv;
 
-    // only run if image is not being dragged onto itself
-    if (event.target.id != data_id) {
+    // if image is being dragged onto itself, stop
+    if (event.target.id == data_id) {
+      return
+    }
 
-      // check if coming from image table
-      if (oldParentDiv.className == "imageDiv") {
+    // image is NOT being dragged onto itself
+    // check if coming from image table
+    if (oldParentDiv.className == "imageDiv") {
 
-        // get parent of target
-        document.body.querySelectorAll("*").forEach(node => {
-          for (let i = 0; i < node.childNodes.length; i++) {
-            if (node.childNodes[i].id == event.target.id) {
-              newDiv = node;
-            }
+      // get parent of target
+      document.body.querySelectorAll("*").forEach(node => {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          if (node.childNodes[i].id == event.target.id) {
+            newDiv = node;
           }
-        });
+        }
+      });
 
-        oldParentDiv.innerHTML = '';
-        oldParentDiv.appendChild(event.target);
-        newDiv.innerHTML = '';
-        newDiv.appendChild(data);
+      oldParentDiv.innerHTML = '';
+      oldParentDiv.appendChild(event.target);
+      newDiv.innerHTML = '';
+      newDiv.appendChild(data);
 
-      } else {
+    } else {
 
-        // figure out which divs are parents of both images
-        document.body.querySelectorAll("*").forEach(node => {
-          for (let i = 0; i < node.childNodes.length; i++) {
-            if(node.childNodes[i].id == data_id){
-              oldDiv = node;
-            }
-            if (node.childNodes[i].id == event.target.id) {
-              newDiv = node;
-            }
+      // figure out which divs are parents of both images
+      document.body.querySelectorAll("*").forEach(node => {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          if(node.childNodes[i].id == data_id){
+            oldDiv = node;
           }
-        });
+          if (node.childNodes[i].id == event.target.id) {
+            newDiv = node;
+          }
+        }
+      });
 
-        // make swap
-        newDiv.innerHTML = '';
-        newDiv.appendChild(data);
-        oldDiv.appendChild(event.target);
-      }
+      // make swap
+      newDiv.innerHTML = '';
+      newDiv.appendChild(data);
+      oldDiv.appendChild(event.target);
     }
   }
+
+  checkIfImageBoxEmpty()
+
 }
 
 function setUpDragAndDrop(){
