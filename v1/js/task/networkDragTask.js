@@ -1,4 +1,4 @@
-let trialAttempts = 0, consecutiveCorrectOnFirstTryTrials = 0,
+let trialAttempts = 0, consecutiveCorrectOnFirstTryTrials = 0;
 function networkDragTask(){
   sectionType = "mainTask";
   taskName = "networkDragTask";
