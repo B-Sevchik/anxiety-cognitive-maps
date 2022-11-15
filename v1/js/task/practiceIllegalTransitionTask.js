@@ -1,16 +1,16 @@
 function practiceIllegalTransitionTask(){
+  // for data logging
   sectionType = "pracTask";
   taskName = "practiceTransitionTask";
 
+  //set up task
   hideCursor();
-
   hideInstructions();
   displayCanvases();
+  selectFirstActiveNode();
 
-  createActiveNode();
   legalIllegalArray = preparePracticeArray();
   transitionType = legalIllegalArray[trialCount-1];
-
   transitionFunc = practiceTransition;
 
   // start task after countdown
@@ -28,27 +28,25 @@ function runIllegalPractice(){
 function practiceTrial(){
   // check if key is being held down going into trial
   if (keyListener == 2 || keyListener == 3) {
-
     promptLetGo();
-
-  } else {
-
-    // display network and image
-    if (showNetworkWalk == true) {drawNetwork()}
-    displayImage();
-
-    // set up for response
-    stimOnset = new Date().getTime() - runStart;
-    respTime = NaN, partResp = NaN, respOnset = NaN, acc = NaN;
-    if (trialCount == 1) {
-      setTimeout(practiceTransition, stimInterval);
-    } else {
-      keyListener = 1;
-    }
-
-    // go to next trial after delay
-    // setTimeout(practiceTransition, stimInterval);
+    return
   }
+
+  // display network and image
+  if (showNetworkWalk == true) {drawNetwork()}
+  displayImage();
+
+  // set up for response
+  stimOnset = new Date().getTime() - runStart;
+  respTime = NaN, partResp = NaN, respOnset = NaN, acc = NaN;
+  if (trialCount == 1) {
+    setTimeout(practiceTransition, stimInterval);
+  } else {
+    keyListener = 1;
+  }
+
+  // go to next trial after delay
+  // setTimeout(practiceTransition, stimInterval);
 }
 
 function practiceTransition(){
@@ -63,15 +61,10 @@ function practiceTransition(){
   } else {
 
     adjustAccuracy();
-
     logIllegalTransitionData();
-
-
-    // remember where we just were
-    rememberPreviousNode();
+    rememberActiveNode();
     resetActiveNode();
-    createTransitionType();
-
+    rememberTransitionType();
     chooseNewNode();
 
     activeNode.activate();
@@ -88,26 +81,25 @@ function practiceTransition(){
 
 function preparePracticeArray(){
   let nIllegalTrials = Math.ceil(nPracticeTrials*illegalProbability)
-  let arr = new Array(nIllegalTrials).fill('i').concat(new Array(nPracticeTrials - nIllegalTrials).fill('l'));
+  let first_two = new Array(2).fill('l') //first two trials aren't illegal
+  let arr = new Array(nIllegalTrials).fill('i').concat(new Array(nPracticeTrials - nIllegalTrials - 2).fill('l'));
+
   do {
     arr = shuffle(arr);
   } while (!arrShuffled(arr));
-  return arr;
+
+  return first_two.concat(arr);
 
   function arrShuffled(arr){
     // make sure there are no consecutive "i"s
     for (var i = 0; i < arr.length; i++) {
-      if (i != 0) {
-        if (arr[i] == 'i' && arr[i - 1] == 'i') {
-          return false;
-        }
+      if (i == 0) {continue}
+
+      if (arr[i] == 'i' && arr[i - 1] == 'i') {
+        return false;
       }
     }
-    // make sure first or second trial isn't i
-    if (arr[0] == 'i' || arr[1] == 'i') {
-      return false;
-    } else {
-      return true;
-    }
+
+    return true;
   }
 }

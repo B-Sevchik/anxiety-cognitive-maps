@@ -1,19 +1,17 @@
-let trialAttempts = 0, consecutiveCorrectOnFirstTryTrials = 0;
 function networkDragTask(){
+  // for data logging
   sectionType = "mainTask";
   taskName = "networkDragTask";
 
-  // this code gets run when networkDragTask gets run
+  // set up some variables
+  trialAttempts = 0
+  consecutiveCorrectOnFirstTryTrials = 0
 
-  // show task div
+  // prepare task
   hideInstructions();
-  setUpDragAndDrop();
   displayNetworkDragTask();
-  setUpCheckAnswerKeyPress();
-  setUpNextTrialKeyPress();
-
-
-  //draw network behind div boxes
+  setUpCheckAnswerButton();
+  setUpNextTrialButton();
   drawHTMLNetwork();
 
   //start task
@@ -21,7 +19,10 @@ function networkDragTask(){
 }
 
 function networkDragTaskFlow(){
-  if ((consecutiveCorrectOnFirstTryTrials >= 3 || trialCount > 10) && trialCount > 4 ) {
+  let maxTrials = 10;
+  let minTrials = 4;
+  let minConsecutive = 3;
+  if ((consecutiveCorrectOnFirstTryTrials >= minConsecutive || trialCount > maxTrials) && trialCount > minTrials) {
     $("#networkDragTask").hide();
     navigateInstructionPath();
   } else {
@@ -32,8 +33,6 @@ function networkDragTaskFlow(){
 function networkDragTrial(){
   trialAttempts = 0;
   stimOnset = new Date().getTime() - runStart;
-
-  // randomly display the nework images in the picture-container div
   displayImages();
 }
 
@@ -100,15 +99,13 @@ function correctlyFill(){
 
 
 function displayImages(){
-  // shuffle images
-  let images = _.shuffle(selectedImages);
-
   // create image table to hold images
   let imageTable = document.createElement("div");
   imageTable.className = "imageTable";
   imageTable.id = "dragImageTable";
 
-  //loop through images
+  //shuffle and loop through images
+  let images = _.shuffle(selectedImages);
   images.forEach((imageObj, i) => {
 
     // create div element to hold image
@@ -121,7 +118,7 @@ function displayImages(){
     newImageObj.width = imageSize * imageScale; //
     newImageObj.draggable = true;
     newImageObj.id = "drag" + i;
-    newImageObj.ondragstart = function(){drag(event);}
+    newImageObj.ondragstart = function(){drag(event)}
 
     // add image to imageDiv
     imageDiv.appendChild(newImageObj);
@@ -133,22 +130,31 @@ function displayImages(){
   // insert image table into images box above network
   document.getElementById("picture-container").appendChild(imageTable);
   document.getElementById("picture-container").style.display = "block";
-
 }
 
 function checkIfImageBoxEmpty(){
-
   if (document.getElementById("dragImageTable")) {
     if (document.getElementById("dragImageTable").childNodes.length == 0) {
       document.getElementById("dragImageTable").remove();
       document.getElementById("picture-container").style.display = "none";
-      // show check answer button
-
       $("#networkDragCheckAnswer").show();
     }
   } else {
     $("#networkDragCheckAnswer").show();
   }
+
+  // switch (document.getElementById("dragImageTable")) {
+  //   case true:
+  //     if (document.getElementById("dragImageTable").childNodes.length > 0) {
+  //       return
+  //     }
+  //
+  //     // remove table
+  //     document.getElementById("dragImageTable").remove();
+  //     document.getElementById("picture-container").style.display = "none";
+  //   case false:
+  //     $("#networkDragCheckAnswer").show();
+  // }
 }
 
 function drawHTMLNetwork(){
@@ -160,7 +166,7 @@ function displayNetworkDragTask(){
   $("#networkDragTask").show();
 }
 
-function setUpCheckAnswerKeyPress(){
+function setUpCheckAnswerButton(){
   $(document).on("click", "#networkDragCheckAnswer", function(){
       respOnset = new Date().getTime() - runStart;
       trialAttempts++;
@@ -206,7 +212,7 @@ function setUpCheckAnswerKeyPress(){
   });
 }
 
-function setUpNextTrialKeyPress(){
+function setUpNextTrialButton(){
   $(document).on("click", "#networkDragNextTrial", function(){
     trialCount++;
     blockTrialCount++;
@@ -227,27 +233,26 @@ function allowDrop(event){
 }
 
 function drag(event){
-  // console.log("drag");
   oldParentDiv = event.target.parentElement;
-  // console.log(event.target.parentElement);
   event.dataTransfer.setData("id", event.target.id);
 }
 
 function drop(event) {
   event.preventDefault();
-  // console.log(event.target);
 
   // first, figure out what is being dropped
   let data_id = event.dataTransfer.getData("id");
+  console.log(data_id);
   let data = document.getElementById(data_id);
+  console.log(data);
+  console.log(event.target);
 
-  // check if data recipient is an empty div or an image
   if (event.target.tagName == "DIV") {
-    // if div, just append
+    // if data recipient is an empty div, append to it
     event.target.appendChild(data);
 
     if (oldParentDiv.className == "imageDiv") {
-      // then delete old parent, don't need anymore
+      // then delete old parent if coming from the image table
       oldParentDiv.remove();
     }
 
@@ -302,12 +307,5 @@ function drop(event) {
 
   checkIfImageBoxEmpty()
 
-}
-
-function setUpDragAndDrop(){
-  // code below allows for dragging and dropping, don't touch
-  let oldParentDiv;
-
-  checkIfImageBoxEmpty();
 
 }

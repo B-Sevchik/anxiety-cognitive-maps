@@ -222,6 +222,7 @@ function getNetworkDiagramReady(){
   nd.style.top = "50%";
   nd.style.left = "50%";
   nd.style.transform = "translate(-50%, -50%)";
+
   // get svg ready (for drawing arrows of mistakes)
   createSVG("svg2","#network-container-sm", 450*imageScale + 'px', 800*imageScale + 'px', false);
   $("<h3 id='upperText' class='illegalText'></p>").insertBefore("#network-container-sm");

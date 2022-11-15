@@ -21,7 +21,9 @@ let practiceAccCutoff = 80;
 // task variables
 let taskNetwork = new Network(), activeNode, prevNode, transitionType;
 let taskFunc, transitionFunc, stimTimeout, feedbackShown, missedSkip;
+let trialAttempts, consecutiveCorrectOnFirstTryTrials, oldParentDiv; //for drag task
 let trialHistory = [];
+let networkPrepared = false;
 let actionArr, stimArr, switchRepeatArr, buffer, stimSet, stroopOnset, trialIsRepeat, trialIsNA, switchType, accArr;
 let canvas, ctx, ntCanvas, ntCtx; //canvas variables
 let data=[], taskName, trialCount, blockTrialCount, acc, accCount, stimOnset, respOnset, respTime, block, partResp, runStart, legalIllegalArray = [], trialType, taskSet; //variables for data logging
@@ -55,9 +57,6 @@ function experimentFlow(){
   if (expStage.indexOf("main1") != -1){
     networkDragTask();
   } else if (expStage.indexOf("main2") != -1){
-    if (!repeatNecessary) {
-      getNetworkDiagramReady(); //this needs to run before first illegal transition task
-    }
     practiceIllegalTransitionTask();
   } else if (expStage.indexOf("main3") != -1){
     illegalTransitionTask();
@@ -82,10 +81,8 @@ function startExperiment(){
   // having set up all the various key and button listeners, start task
   runStart = new Date().getTime();
   setUpNetwork();
-  // prepareNetworkDiagram();
-  // $("#network-diagram").hide();
+  prepareNetworkDiagram();
   runInstructions();
-
 }
 
 function keyPressFunction(event){
@@ -116,12 +113,6 @@ function keyPressFunction(event){
           acc = 0;
         }
       }
-    } else if (taskName.indexOf("stroop") != -1) {
-      acc = (currentTaskArray[trialCount-1][3].includes(partResp)) ? 1 : 0;
-      if (acc) {
-        accCount++;
-      }
-      respTime = respOnset - stroopOnset;
     }
   }
 }
@@ -136,13 +127,8 @@ function keyPressFunction(event){
 
 function keyUpFunction(event){
   if (keyListener == 2 ) { //good press release
-    if (taskName == "practiceTransitionTask") {
-      transitionFunc();
-    }
-    if (earlyReleaseExperiment) {
-      clearTimeout(stimTimeout);
-      transitionFunc();
-    }
+    clearTimeout(stimTimeout);
+    transitionFunc();
     keyListener = 0;
   } else if (keyListener == 3) { //resets bad press to 0
     keyListener = 0;

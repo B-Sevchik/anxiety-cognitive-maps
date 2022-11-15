@@ -46,7 +46,6 @@ table{
 
 .demoSelect{
   width: 250px;
-  border-top: black;
 }
 
 canvas {
@@ -72,6 +71,7 @@ canvas {
   display: table-cell;
   padding: 13px;
   float: left;
+
 }
 
 /* instruction screen styles */
@@ -340,7 +340,7 @@ canvas {
 }
 
 .smH{
-  height:calc(80px * var(--size-scale));
+  height:calc(100px * var(--size-scale));
 }
 
 #slot0{
@@ -467,6 +467,9 @@ canvas {
   font-size: 25px;
 }
 
+
+
+/* STAI css */
 #STAI_div {
   width: 400px;
   margin: 0 auto;

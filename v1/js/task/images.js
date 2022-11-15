@@ -66,22 +66,39 @@ function createImageTable(){
   imageTableDiv.appendChild(imageTable);
 }
 
-// function prepareNetworkDiagram(){
-//   createSVG("svg1","#network-container-sm", 450*imageScale + 'px', 850*imageScale + 'px');
-//   drawSVGLines("svg1", "plot", "#network-container-sm");
-//
-//   // fill images into network diagram
-//
+function prepareNetworkDiagram(){
+  createSVG("svg1","#network-container-sm", 450*imageScale + 'px', 850*imageScale + 'px');
+  drawSVGLines("svg1", "plot", "#network-container-sm");
 
+  // fill images into network diagram
+  for (var i = 0; i < 10; i++) {
+    let imageDiv = new Image;
+    imageDiv.src = selectedImages[i].src
+    imageDiv.width = 100 * imageScale; //
+    imageDiv.id = "img" + i;
+    document.getElementById("plot"+i).append(imageDiv);
+  }
+}
 
-//   for (var i = 0; i < 10; i++) {
-//     let imageDiv = new Image;
-//     imageDiv.src = [i].src
-//     imageDiv.width = 100 * imageScale; //
-//     imageDiv.id = "img" + i;
-//     document.getElementById("plot"+i).append(imageDiv);
-//   }
-// }
+function prepareNetworkDiagram(){
+  document.getElementById("network-diagram").style.display = "flex";
+  createSVG("svg1","#network-container-sm", 450*imageScale + 'px', 850*imageScale + 'px');
+  drawSVGLines("svg1", "plot", "#network-container-sm");
+  insertImagesIntoNetworkDiagram()
+  getNetworkDiagramReady();
+  $("#network-diagram").hide()
+}
+
+function insertImagesIntoNetworkDiagram(){
+  // fill images into network diagram
+  for (let i = 0; i < taskNetwork.nodes.length; i++) {
+    let imageDiv = new Image;
+    imageDiv.src = taskNetwork.nodes[i].img.src
+    imageDiv.width = 100 * imageScale; //
+    imageDiv.id = "img" + i;
+    document.getElementById("plot"+i).append(imageDiv);
+  }
+}
 
 function createSVG(id, location, h, w, before = true){
   // add svg (for drawing lines)
@@ -99,6 +116,7 @@ function createSVG(id, location, h, w, before = true){
 }
 
 function drawSVGLines(svg, id_tag, reference){
+  console.log('drawing lines' );
   // loop through html elements and draw lines for each
   document.body.querySelectorAll("*").forEach(node => {
     if (node.id.indexOf(id_tag) != -1) {

@@ -70,8 +70,6 @@ $(document).ready(function(){
 
   } else {
 
-    // prepareNetworkDiagram();
-    $("#network-diagram").hide();
     prepareMenu();
 
   }

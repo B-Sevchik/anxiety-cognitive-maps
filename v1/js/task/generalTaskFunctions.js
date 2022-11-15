@@ -5,7 +5,7 @@ function countDown(functionToCall, seconds, cdSpeed = "normal"){
   ctx.font = "bold 60px Arial";
   if (seconds > 0){
     ctx.fillText(seconds,canvas.width/2,canvas.height/2)
-    setTimeout(function(){countDown(seconds - 1, cdSpeed)},timePerCycle);
+    setTimeout(function(){countDown(functionToCall, seconds - 1, cdSpeed)},timePerCycle);
   } else {
     functionToCall();
   }
@@ -224,18 +224,17 @@ function practiceFeedback(accuracy){
   }
 }
 
-function chooseFirstActiveNode(){
+function selectFirstActiveNode(){
   activeNode = _.sample(taskNetwork.nodes,1)[0];
   activeNode.activate();
   trialHistory.push(activeNode.name);
-  transitionType = legalIllegalArray[trialCount-1];
 }
 
 function hideInstructions(){
   $('#instructionsDiv').hide();
 }
 
-function rememberPreviousNode(){
+function rememberActiveNode(){
   prevNode = activeNode;
 }
 
@@ -261,7 +260,7 @@ function adjustAccuracy(){
   accCount = accCount + acc;
 }
 
-function createTransitionType(){
+function rememberTransitionType(){
   prevTransition = transitionType;
 }
 
