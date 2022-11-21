@@ -1,3 +1,5 @@
+"use strict"
+
 function networkDragTask(){
   // for data logging
   sectionType = "mainTask";
@@ -237,15 +239,60 @@ function drag(event){
   event.dataTransfer.setData("id", event.target.id);
 }
 
-function drop(event) {
-  event.preventDefault();
+function whichNode(src){
+  for (let i = 0; i < taskNetwork.nodes.length; i++) {
+    if (src == taskNetwork.nodes[i].img.src) {
+      return {
+        "threat": taskNetwork.nodes[i].threat,
+        "name": taskNetwork.nodes[i].name,
+        "index": taskNetwork.nodes[i].index
+      }
+    }
+  }
+}
 
+function isEmptyTarget(target){
+  return target.classList.contains("slot")
+}
+
+function whichSlotN(slotName){
+  return parseInt(slotName.match(/\d+/)[0]) + 1
+}
+
+function drop(event) {
+
+  console.log(event);
   // first, figure out what is being dropped
   let data_id = event.dataTransfer.getData("id");
-  console.log(data_id);
   let data = document.getElementById(data_id);
-  console.log(data);
-  console.log(event.target);
+
+  // if image is being dragged onto itself, stop
+  if (event.target.id == data_id) {
+    return
+  }
+
+  // log data relating to dragging
+  let dragSRC = fileOnly(data.src); // file that was moved
+  let dragNode = whichNode(data.src)["name"]; // which node does the image belong to
+  let dragThreat = whichNode(data.src)["threat"]
+  // did this drag bring the image to the correct spot
+  let dragOrigin = (oldParentDiv.className == "imageDiv") ? "table" : oldParentDiv.id;
+  let dragDestination = (isEmptyTarget(event.target)) ? event.target.id : event.target.parentElement.id
+  let dragAcc = whichNode(data.src)["index"] == whichSlotN(dragDestination)
+
+  // log data relating to swapping
+  let swappedSRC = (isEmptyTarget(event.target)) ? NaN : fileOnly(event.target.src)
+  let swappedNode = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["name"]
+  let swappedOrigin = (isEmptyTarget(event.target)) ? NaN : dragDestination;
+  let swappedDestination = (isEmptyTarget(event.target)) ? NaN : dragOrigin;
+  let swappedThreat = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"]
+  let swappedAcc = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dragOrigin)
+
+  console.log("Moved " + dragSRC + " (" + dragNode + ", " + dragThreat + ") from " + dragOrigin + " to " + dragDestination + " and swapped with " + swappedSRC + " (" + swappedNode + ", " + swappedThreat + ")");
+  console.log(dragAcc);
+
+
+  // console.log();
 
   if (event.target.tagName == "DIV") {
     // if data recipient is an empty div, append to it
@@ -260,11 +307,6 @@ function drop(event) {
     //there was already an image in the box
 
     let oldDiv, newDiv;
-
-    // if image is being dragged onto itself, stop
-    if (event.target.id == data_id) {
-      return
-    }
 
     // image is NOT being dragged onto itself
     // check if coming from image table

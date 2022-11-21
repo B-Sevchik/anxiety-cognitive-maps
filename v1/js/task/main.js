@@ -82,7 +82,8 @@ function startExperiment(){
   runStart = new Date().getTime();
   setUpNetwork();
   prepareNetworkDiagram();
-  runInstructions();
+  // runInstructions();
+  experimentFlow()
 }
 
 function keyPressFunction(event){
