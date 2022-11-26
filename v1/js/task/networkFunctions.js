@@ -213,6 +213,22 @@ function isCommunityTransition(){
   }
 }
 
+function transitionThreatKind(){
+  if ((prevNode.threat == true) && (activeNode.threat == true))  {
+    return 'threat-threat transition'
+  }
+  elif ((prevNode.threat == true) && (activeNode.threat == false))  {
+    return 'threat-neutral transition'
+  }
+  elif ((prevNode.threat == false) && (activeNode.threat == true))  {
+    return 'neutral-threat transition'
+  }
+  elif ((prevNode.threat == false) && (activeNode.threat == false))  {
+    return 'neutral-neutral transition'
+  }
+
+}
+
 function getNetworkDiagramReady(){
   let nd = document.getElementById("network-diagram");
   //insert diagram back into main html (had been in instructions)
