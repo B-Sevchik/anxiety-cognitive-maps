@@ -2,7 +2,6 @@
 
 function networkDragTask(){
   // for data logging
-  sectionType = "mainTask";
   taskName = "networkDragTask";
 
   // set up some variables
@@ -35,6 +34,7 @@ function networkDragTaskFlow(){
 function networkDragTrial(){
   trialAttempts = 0;
   stimOnset = new Date().getTime() - runStart;
+  prevDropOnset = stimOnset;
   displayImages();
 }
 
@@ -171,6 +171,7 @@ function displayNetworkDragTask(){
 function setUpCheckAnswerButton(){
   $(document).on("click", "#networkDragCheckAnswer", function(){
       respOnset = new Date().getTime() - runStart;
+      prevDropOnset = respOnset;
       trialAttempts++;
       // color images if correct or incorrect
       let nCorrect = 0;
@@ -209,7 +210,7 @@ function setUpCheckAnswerButton(){
         $("#networkDragNextTrial").show();
         $("#networkDragCheckAnswer").hide();
       }
-
+      sectionType = "dragTaskCheckAnswerEvent"
       logDragTaskData(nCorrect, slotDict);
   });
 }
@@ -244,10 +245,36 @@ function drop(event) {
 
   // first, figure out what is being dropped
   let data_id = event.dataTransfer.getData("id");
-  console.log(data_id);
   let data = document.getElementById(data_id);
-  console.log(data);
-  console.log(event.target);
+
+  // if image is being dragged onto itself, stop
+  if (event.target.id == data_id) {
+    return
+  }
+
+  // log data relating to dragging
+  let dropEvent = {}
+  dropEvent["dropOnset"] = new Date().getTime() - runStart
+  dragSRC = fileOnly(data.src); // file that was moved
+  dragNode = whichNode(data.src)["name"]; // which node does the image belong to
+  dragThreat = whichNode(data.src)["threat"] ? 1 : 0
+  // did this drag bring the image to the correct spot
+  dragOrigin = (oldParentDiv.className == "imageDiv") ? "table" : oldParentDiv.id;
+  dragDestination = (isEmptyTarget(event.target)) ? event.target.id : event.target.parentElement.id
+  dragAcc = whichNode(data.src)["index"] == whichSlotN(dragDestination)
+
+  // log data relating to swapping
+  swappedSRC = (isEmptyTarget(event.target)) ? NaN : fileOnly(event.target.src)
+  swappedNode = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["name"]
+  swappedOrigin = (isEmptyTarget(event.target)) ? NaN : dragDestination;
+  swappedDestination = (isEmptyTarget(event.target)) ? NaN : dragOrigin;
+  swappedThreat = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"]
+  swappedAcc = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dragOrigin) ? 1 : 0
+  sectionType = "dragTaskDropEvent"
+  logDragDropEvent(dropEvent)
+
+  // get drop onset set up for next drop event
+  prevDropOnset = dropOnset;
 
   if (event.target.tagName == "DIV") {
     // if data recipient is an empty div, append to it
@@ -262,11 +289,6 @@ function drop(event) {
     //there was already an image in the box
 
     let oldDiv, newDiv;
-
-    // if image is being dragged onto itself, stop
-    if (event.target.id == data_id) {
-      return
-    }
 
     // image is NOT being dragged onto itself
     // check if coming from image table
@@ -309,22 +331,22 @@ function drop(event) {
 
   checkIfImageBoxEmpty()
 
-for (var i=0; i<10; i++){
-  console.log(oldParentDiv.classname)  //where is image coming from? imageDiv or imageTable?
-    //if coming from imageDiv, which slot number was image div?
-  console.log(document.getElementById("slot"+i)) //which slot in the network diagram did you place the image?
-}
-
-//using slot dict defined above:
-for (var i = 0; i < 10; i++){
-  console.log(slotDict['slot'+i]['correct_src']) //what image is supposed to be in the slot you put the image in?
-  console.log(slotDict['slot'+i]['correct_node']) //what node does the image supposed to be in the slot you put the image in correspond to?
-  console.log(slotDict['slot'+i]['correct_type']) //what type of image is supposed to be in the slot you put the image in?
-  console.log(slotDict['slot'+i]['current_src'])//what is the src/url of image put in the slot/what is the actual image dropped?
-  console.log()//what node does the image we dropped correspond to?
-  console.log(slotDict['slot'+i]['current_type'])//is the image we dropped a threat or neutral image?
-  console.log(slotDict['slot'+i]['accuracy']) //is the image in the right slot in network diagram?
-}
+// for (var i=0; i<10; i++){
+//   console.log(oldParentDiv.classname)  //where is image coming from? imageDiv or imageTable?
+//     //if coming from imageDiv, which slot number was image div?
+//   console.log(document.getElementById("slot"+i)) //which slot in the network diagram did you place the image?
+// }
+//
+// //using slot dict defined above:
+// for (var i = 0; i < 10; i++){
+//   console.log(slotDict['slot'+i]['correct_src']) //what image is supposed to be in the slot you put the image in?
+//   console.log(slotDict['slot'+i]['correct_node']) //what node does the image supposed to be in the slot you put the image in correspond to?
+//   console.log(slotDict['slot'+i]['correct_type']) //what type of image is supposed to be in the slot you put the image in?
+//   console.log(slotDict['slot'+i]['current_src'])//what is the src/url of image put in the slot/what is the actual image dropped?
+//   console.log()//what node does the image we dropped correspond to?
+//   console.log(slotDict['slot'+i]['current_type'])//is the image we dropped a threat or neutral image?
+//   console.log(slotDict['slot'+i]['accuracy']) //is the image in the right slot in network diagram?
+// }
 
 }
 
