@@ -217,13 +217,13 @@ function transitionThreatKind(){
   if ((prevNode.threat == true) && (activeNode.threat == true))  {
     return 'threat-threat transition'
   }
-  elif ((prevNode.threat == true) && (activeNode.threat == false))  {
+  else if ((prevNode.threat == true) && (activeNode.threat == false))  {
     return 'threat-neutral transition'
   }
-  elif ((prevNode.threat == false) && (activeNode.threat == true))  {
+  else if ((prevNode.threat == false) && (activeNode.threat == true))  {
     return 'neutral-threat transition'
   }
-  elif ((prevNode.threat == false) && (activeNode.threat == false))  {
+  else if ((prevNode.threat == false) && (activeNode.threat == false))  {
     return 'neutral-neutral transition'
   }
 

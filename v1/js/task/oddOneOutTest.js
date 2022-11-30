@@ -34,7 +34,6 @@ function oddOneOutTest() {
   let nodeSetDisplayStart;
   let pressedSameButtonCounter = 0, prevResponse;
   let earlyButtonPressCounter = 0, spamEvent = false; spamEventCounter = 0;
-  let threatStatus = (currentNodeSet.nodes[imageNum-1].threat) ? "threat" : "neutral";
 
   // set up DOM elements variables
   let image1 = document.getElementById("OO_image1");

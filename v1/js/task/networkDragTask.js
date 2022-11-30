@@ -1,5 +1,3 @@
-"use strict"
-
 function networkDragTask(){
   // for data logging
   sectionType = "mainTask";
@@ -239,60 +237,15 @@ function drag(event){
   event.dataTransfer.setData("id", event.target.id);
 }
 
-function whichNode(src){
-  for (let i = 0; i < taskNetwork.nodes.length; i++) {
-    if (src == taskNetwork.nodes[i].img.src) {
-      return {
-        "threat": taskNetwork.nodes[i].threat,
-        "name": taskNetwork.nodes[i].name,
-        "index": taskNetwork.nodes[i].index
-      }
-    }
-  }
-}
-
-function isEmptyTarget(target){
-  return target.classList.contains("slot")
-}
-
-function whichSlotN(slotName){
-  return parseInt(slotName.match(/\d+/)[0]) + 1
-}
-
 function drop(event) {
+  event.preventDefault();
 
-  console.log(event);
   // first, figure out what is being dropped
   let data_id = event.dataTransfer.getData("id");
+  console.log(data_id);
   let data = document.getElementById(data_id);
-
-  // if image is being dragged onto itself, stop
-  if (event.target.id == data_id) {
-    return
-  }
-
-  // log data relating to dragging
-  let dragSRC = fileOnly(data.src); // file that was moved
-  let dragNode = whichNode(data.src)["name"]; // which node does the image belong to
-  let dragThreat = whichNode(data.src)["threat"]
-  // did this drag bring the image to the correct spot
-  let dragOrigin = (oldParentDiv.className == "imageDiv") ? "table" : oldParentDiv.id;
-  let dragDestination = (isEmptyTarget(event.target)) ? event.target.id : event.target.parentElement.id
-  let dragAcc = whichNode(data.src)["index"] == whichSlotN(dragDestination)
-
-  // log data relating to swapping
-  let swappedSRC = (isEmptyTarget(event.target)) ? NaN : fileOnly(event.target.src)
-  let swappedNode = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["name"]
-  let swappedOrigin = (isEmptyTarget(event.target)) ? NaN : dragDestination;
-  let swappedDestination = (isEmptyTarget(event.target)) ? NaN : dragOrigin;
-  let swappedThreat = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"]
-  let swappedAcc = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dragOrigin)
-
-  console.log("Moved " + dragSRC + " (" + dragNode + ", " + dragThreat + ") from " + dragOrigin + " to " + dragDestination + " and swapped with " + swappedSRC + " (" + swappedNode + ", " + swappedThreat + ")");
-  console.log(dragAcc);
-
-
-  // console.log();
+  console.log(data);
+  console.log(event.target);
 
   if (event.target.tagName == "DIV") {
     // if data recipient is an empty div, append to it
@@ -307,6 +260,11 @@ function drop(event) {
     //there was already an image in the box
 
     let oldDiv, newDiv;
+
+    // if image is being dragged onto itself, stop
+    if (event.target.id == data_id) {
+      return
+    }
 
     // image is NOT being dragged onto itself
     // check if coming from image table
@@ -349,5 +307,21 @@ function drop(event) {
 
   checkIfImageBoxEmpty()
 
+for (var i=0; i<10; i++){
+  console.log(oldParentDiv.classname)  //where is image coming from? imageDiv or imageTable?
+    //if coming from imageDiv, which slot number was image div?
+  console.log(document.getElementById("slot"+i)) //which slot in the network diagram did you place the image?
+}
+
+//using slot dict defined above:
+for (var i = 0; i < 10; i++){
+  console.log(slotDict['slot'+i]['correct_src']) //what image is supposed to be in the slot you put the image in?
+  console.log(slotDict['slot'+i]['correct_node']) //what node does the image supposed to be in the slot you put the image in correspond to?
+  console.log(slotDict['slot'+i]['correct_type']) //what type of image is supposed to be in the slot you put the image in?
+  console.log(slotDict['slot'+i]['current_src'])//what is the src/url of image put in the slot/what is the actual image dropped?
+  console.log()//what node does the image we dropped correspond to?
+  console.log(slotDict['slot'+i]['current_type'])//is the image we dropped a threat or neutral image?
+  console.log(slotDict['slot'+i]['accuracy']) //is the image in the right slot in network diagram?
+}
 
 }
