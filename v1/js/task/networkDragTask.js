@@ -1,3 +1,5 @@
+"use strict"
+
 function networkDragTask(){
   // for data logging
   sectionType = "mainTask";
@@ -324,4 +326,24 @@ for (var i = 0; i < 10; i++){
   console.log(slotDict['slot'+i]['accuracy']) //is the image in the right slot in network diagram?
 }
 
+}
+
+function whichNode(src){
+  for (let i = 0; i < taskNetwork.nodes.length; i++) {
+    if (src == taskNetwork.nodes[i].img.src) {
+      return {
+        "threat": taskNetwork.nodes[i].threat,
+        "name": taskNetwork.nodes[i].name,
+        "index": taskNetwork.nodes[i].index
+      }
+    }
+  }
+}
+
+function isEmptyTarget(target){
+  return target.classList.contains("slot")
+}
+
+function whichSlotN(slotName){
+  return parseInt(slotName.match(/\d+/)[0]) + 1
 }
