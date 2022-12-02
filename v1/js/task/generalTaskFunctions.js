@@ -230,10 +230,6 @@ function selectFirstActiveNode(){
   trialHistory.push(activeNode.name);
 }
 
-function hideInstructions(){
-  $('#instructionsDiv').hide();
-}
-
 function rememberActiveNode(){
   prevNode = activeNode;
 }

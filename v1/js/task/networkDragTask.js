@@ -5,7 +5,6 @@ function networkDragTask(){
   taskName = "networkDragTask";
 
   // set up some variables
-  trialAttempts = 0
   consecutiveCorrectOnFirstTryTrials = 0
 
   // prepare task
@@ -32,7 +31,7 @@ function networkDragTaskFlow(){
 }
 
 function networkDragTrial(){
-  trialAttempts = 0;
+  trialAttempts = 1;
   stimOnset = new Date().getTime() - runStart;
   prevDropOnset = stimOnset;
   displayImages();
@@ -172,7 +171,6 @@ function setUpCheckAnswerButton(){
   $(document).on("click", "#networkDragCheckAnswer", function(){
       respOnset = new Date().getTime() - runStart;
       prevDropOnset = respOnset;
-      trialAttempts++;
       // color images if correct or incorrect
       let nCorrect = 0;
       let anyIncorrect = false;
@@ -212,6 +210,7 @@ function setUpCheckAnswerButton(){
       }
       sectionType = "dragTaskCheckAnswerEvent"
       logDragTaskData(nCorrect, slotDict);
+      trialAttempts++;
   });
 }
 
@@ -257,18 +256,27 @@ function drop(event) {
   dropOnset = new Date().getTime() - runStart
   dropEvent["dragSRC"] = fileOnly(data.src) //file that was moved
   dropEvent["dragNode"] = whichNode(data.src)["name"] // which node does the image belong to
-  dropEvent["dragThreat"] = whichNode(data.src)["threat"] ? 1 : 0
+  dropEvent["dragThreat"] = whichNode(data.src)["threat"] ? "threat" : "neutral"
   // did this drag bring the image to the correct spot
   dropEvent["dragOrigin"] = (oldParentDiv.className == "imageDiv") ? "table" : oldParentDiv.id
   dropEvent["dragDestination"] = (isEmptyTarget(event.target)) ? event.target.id : event.target.parentElement.id
-  dropEvent["dragAcc"] = whichNode(data.src)["index"] == whichSlotN(dropEvent["dragDestination"])
+  dropEvent["dragAcc"] = whichNode(data.src)["index"] == whichSlotN(dropEvent["dragDestination"]) ? 1 : 0;
 
   // log data relating to swapping
   dropEvent["swappedSRC"] = (isEmptyTarget(event.target)) ? NaN : fileOnly(event.target.src)
   dropEvent["swappedNode"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["name"]
+  dropEvent["swappedThreat"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"] ? "threat" : "neutral"
   dropEvent["swappedOrigin"] = (isEmptyTarget(event.target)) ? NaN : dropEvent["dragDestination"];
   dropEvent["swappedDestination"] = (isEmptyTarget(event.target)) ? NaN : dropEvent["dragOrigin"];
-  dropEvent["swappedThreat"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"]
+  if (!isEmptyTarget(event.target)) {
+    console.log('---');
+    console.log(event.target.src);
+    console.log(whichNode(event.target.src));
+    console.log(whichNode(event.target.src)["index"]);
+    console.log('---');
+    console.log(dropEvent["dragOrigin"]);
+    console.log(whichSlotN(dropEvent["dragOrigin"]));
+  }
   dropEvent["swappedAcc"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dropEvent["dragOrigin"]) ? 1 : 0
 
   //update global variables to log
@@ -369,5 +377,9 @@ function isEmptyTarget(target){
 }
 
 function whichSlotN(slotName){
-  return parseInt(slotName.match(/\d+/)[0]) + 1
+  if (slotName.match(/\d/)) {
+    return parseInt(slotName.match(/\d/)[0]) + 1
+  } else {
+    return undefined
+  }
 }

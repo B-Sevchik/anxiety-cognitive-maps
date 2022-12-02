@@ -85,7 +85,8 @@ $(document).ready(function(){
 
 function prepareMenu(){
   // update menu to first value
-  updateMainMenu(4);
+  let initialExperimentStage = 4
+  updateMainMenu(initialExperimentStage);
 
   $("#demographicSubmit").click(function(){
     let anyBlank = false;
@@ -158,23 +159,19 @@ if (Object.keys(STAI_vals).length == 20) {
   //   }
   $("#STAI_data").val(Object.values(STAI_vals).join(';'));
   updateMainMenu(4);
+
 }
 
 //if participant does not answer all questions/skips question(s)
 else if (Object.keys(STAI_vals).length < 20) {
+
   alert("Please answer all questions.");
   let questions_list_array = document.getElementsByClassName("STAI_question");
-      for (let i = 1; i < questions_list_array.length+1; i++) {
-        console.log("question"+i);
-        let questionInArray = document.getElementById("STAI_question"+i);
-        if (!("question"+i in STAI_vals)) {
-          questionInArray.style.color = 'red'
-        }
-        else if (("question"+i in STAI_vals)) {
-          questionInArray.style.color = 'black'
-        }
+  for (let i = 1; i < questions_list_array.length+1; i++) {
+    let questionInArray = document.getElementById("STAI_question"+i);
+    questionInArray.style.color = ("question"+i in STAI_vals) ? 'black' : 'red';
+  }
 
-      }
 }
 });
 

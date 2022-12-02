@@ -214,19 +214,11 @@ function isCommunityTransition(){
 }
 
 function transitionThreatKind(){
-  if ((prevNode.threat == true) && (activeNode.threat == true))  {
-    return 'threat-threat transition'
-  }
-  else if ((prevNode.threat == true) && (activeNode.threat == false))  {
-    return 'threat-neutral transition'
-  }
-  else if ((prevNode.threat == false) && (activeNode.threat == true))  {
-    return 'neutral-threat transition'
-  }
-  else if ((prevNode.threat == false) && (activeNode.threat == false))  {
-    return 'neutral-neutral transition'
-  }
+  if (!prevNode) {return NaN}
 
+  let prevNodeType = (prevNode.threat) ? "threat" : "neutral"
+  let currNodeType = (activeNode.threat) ? "threat" : "neutral"
+  return prevNodeType + "-" + currNodeType
 }
 
 function getNetworkDiagramReady(){
