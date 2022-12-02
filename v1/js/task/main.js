@@ -29,7 +29,7 @@ let canvas, ctx, ntCanvas, ntCtx; //canvas variables
 let data=[], taskName, trialCount, blockTrialCount, acc, accCount, stimOnset, respOnset, respTime, block, partResp, runStart, legalIllegalArray = [], trialType, taskSet; //variables for data logging
 let breakOn = false, repeatNecessary = false; //variables for block breaks and repeating practie blocks
 let sectionStart, sectionEnd, sectionType, sectionTimer; //for logging non experimental sections (instruction and break screens)
-let dragSRC, dragNode, dragThreat, dragOrigin, dragDestination, swappedSRC, swappedNode, swappedThreat, dragAcc, swappedOrigin, swappedDestination, swappedAcc, dropOnset, prevDropOnset; // global variables for logging drag task drop events
+let dropOnset, prevDropOnset; // global variables for logging drag task drop events
 let imageSize = 150, imageScale = 0.6;
 let keyListener = 0;
 /*  key press listener values:

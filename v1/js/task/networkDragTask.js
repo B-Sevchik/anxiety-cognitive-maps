@@ -254,22 +254,24 @@ function drop(event) {
 
   // log data relating to dragging
   let dropEvent = {}
-  dropEvent["dropOnset"] = new Date().getTime() - runStart
-  dragSRC = fileOnly(data.src); // file that was moved
-  dragNode = whichNode(data.src)["name"]; // which node does the image belong to
-  dragThreat = whichNode(data.src)["threat"] ? 1 : 0
+  dropOnset = new Date().getTime() - runStart
+  dropEvent["dragSRC"] = fileOnly(data.src) //file that was moved
+  dropEvent["dragNode"] = whichNode(data.src)["name"] // which node does the image belong to
+  dropEvent["dragThreat"] = whichNode(data.src)["threat"] ? 1 : 0
   // did this drag bring the image to the correct spot
-  dragOrigin = (oldParentDiv.className == "imageDiv") ? "table" : oldParentDiv.id;
-  dragDestination = (isEmptyTarget(event.target)) ? event.target.id : event.target.parentElement.id
-  dragAcc = whichNode(data.src)["index"] == whichSlotN(dragDestination)
+  dropEvent["dragOrigin"] = (oldParentDiv.className == "imageDiv") ? "table" : oldParentDiv.id
+  dropEvent["dragDestination"] = (isEmptyTarget(event.target)) ? event.target.id : event.target.parentElement.id
+  dropEvent["dragAcc"] = whichNode(data.src)["index"] == whichSlotN(dropEvent["dragDestination"])
 
   // log data relating to swapping
-  swappedSRC = (isEmptyTarget(event.target)) ? NaN : fileOnly(event.target.src)
-  swappedNode = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["name"]
-  swappedOrigin = (isEmptyTarget(event.target)) ? NaN : dragDestination;
-  swappedDestination = (isEmptyTarget(event.target)) ? NaN : dragOrigin;
-  swappedThreat = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"]
-  swappedAcc = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dragOrigin) ? 1 : 0
+  dropEvent["swappedSRC"] = (isEmptyTarget(event.target)) ? NaN : fileOnly(event.target.src)
+  dropEvent["swappedNode"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["name"]
+  dropEvent["swappedOrigin"] = (isEmptyTarget(event.target)) ? NaN : dropEvent["dragDestination"];
+  dropEvent["swappedDestination"] = (isEmptyTarget(event.target)) ? NaN : dropEvent["dragOrigin"];
+  dropEvent["swappedThreat"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"]
+  dropEvent["swappedAcc"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dropEvent["dragOrigin"]) ? 1 : 0
+
+  //update global variables to log
   sectionType = "dragTaskDropEvent"
   logDragDropEvent(dropEvent)
 
