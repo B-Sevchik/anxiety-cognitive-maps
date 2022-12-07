@@ -209,7 +209,7 @@ function setUpCheckAnswerButton(){
         $("#networkDragCheckAnswer").hide();
       }
       sectionType = "dragTaskCheckAnswerEvent"
-      logDragTaskData(nCorrect, slotDict);
+      logDragTaskCheckAnswerData(nCorrect, slotDict);
       trialAttempts++;
   });
 }
