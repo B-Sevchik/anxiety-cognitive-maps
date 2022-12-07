@@ -14,7 +14,7 @@ let n_neutral_images_in_bank = 10
 let n_neutral_images_in_network = 6
 let selected_neutral_SRCs = getImageSRCs(n_neutral_images_in_bank, n_neutral_images_in_network, 'neutral_images')
 
-let n_threat_images_in_bank = 19
+let n_threat_images_in_bank = 4
 let n_threat_images_in_network = 4
 let selected_threat_SRCs = getImageSRCs(n_threat_images_in_bank, n_threat_images_in_network, 'threat_images')
 
