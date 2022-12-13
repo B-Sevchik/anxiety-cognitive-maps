@@ -66,7 +66,7 @@ function oddOneOutTest() {
         respTime = respOnset - stimOnset;
 
         // log data
-        logOddOneOutData();
+        logOddOneOutData(currentNodeSet, imageNum);
 
 
         if (nodeSetIterator < mainTaskArr.length - 1) {

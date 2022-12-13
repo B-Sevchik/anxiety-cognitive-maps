@@ -97,7 +97,7 @@ function logIllegalTransitionData(){
   console.log(data);
 }
 
-function logOddOneOutData(){
+function logOddOneOutData(currentNodeSet, imageNum){
   generalData = [sectionType, taskName, nodeSetIterator + 1, nodeSetIterator + 1, block, NaN, stimOnset, respOnset, respOnset - stimOnset, acc, NaN, partResp]
 
   sectionData = new Array(nSectionDataPoints).fill(NaN)
