@@ -31,7 +31,7 @@ function networkDragTaskFlow(){
 }
 
 function networkDragTrial(){
-  trialAttempts = 1;
+  trialAttempt = 1;
   stimOnset = new Date().getTime() - runStart;
   prevDropOnset = stimOnset;
   displayImages();
@@ -83,12 +83,12 @@ function randomlyFill(){
 function correctlyFill(){
   for (var i = 0; i < 10; i++) {
     let imageDiv = new Image;
-    imageDiv.src = selectedImages[i].src
+    imageDiv.src = taskNetwork.nodes[i].img.src
     imageDiv.width = imageSize * imageScale; //
     imageDiv.draggable = true;
     imageDiv.id = "drag" + i;
-    imageDiv.ondragstart = function(){drag(event);}
-    document.getElementById("slot"+i).append(imageDiv);
+    imageDiv.ondragstart = function(){drag(event)}
+    document.getElementById("slot"+(i)).append(imageDiv);
   }
 
   // remove table and show submit button
@@ -96,8 +96,6 @@ function correctlyFill(){
   document.getElementById("picture-container").style.display = "none";
   $("#networkDragCheckAnswer").show();
 }
-
-
 
 function displayImages(){
   // create image table to hold images
@@ -210,7 +208,7 @@ function setUpCheckAnswerButton(){
       }
       sectionType = "dragTaskCheckAnswerEvent"
       logDragTaskCheckAnswerData(nCorrect, slotDict);
-      trialAttempts++;
+      trialAttempt++;
   });
 }
 
@@ -218,7 +216,7 @@ function setUpNextTrialButton(){
   $(document).on("click", "#networkDragNextTrial", function(){
     trialCount++;
     blockTrialCount++;
-    if (trialAttempts == 1) {
+    if (trialAttempt == 2) {
       consecutiveCorrectOnFirstTryTrials++;
     } else {
       consecutiveCorrectOnFirstTryTrials = 0;
@@ -268,15 +266,6 @@ function drop(event) {
   dropEvent["swappedThreat"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["threat"] ? "threat" : "neutral"
   dropEvent["swappedOrigin"] = (isEmptyTarget(event.target)) ? NaN : dropEvent["dragDestination"];
   dropEvent["swappedDestination"] = (isEmptyTarget(event.target)) ? NaN : dropEvent["dragOrigin"];
-  if (!isEmptyTarget(event.target)) {
-    console.log('---');
-    console.log(event.target.src);
-    console.log(whichNode(event.target.src));
-    console.log(whichNode(event.target.src)["index"]);
-    console.log('---');
-    console.log(dropEvent["dragOrigin"]);
-    console.log(whichSlotN(dropEvent["dragOrigin"]));
-  }
   dropEvent["swappedAcc"] = (isEmptyTarget(event.target)) ? NaN : whichNode(event.target.src)["index"] == whichSlotN(dropEvent["dragOrigin"]) ? 1 : 0
 
   //update global variables to log
@@ -340,24 +329,6 @@ function drop(event) {
   }
 
   checkIfImageBoxEmpty()
-
-// for (var i=0; i<10; i++){
-//   console.log(oldParentDiv.classname)  //where is image coming from? imageDiv or imageTable?
-//     //if coming from imageDiv, which slot number was image div?
-//   console.log(document.getElementById("slot"+i)) //which slot in the network diagram did you place the image?
-// }
-//
-// //using slot dict defined above:
-// for (var i = 0; i < 10; i++){
-//   console.log(slotDict['slot'+i]['correct_src']) //what image is supposed to be in the slot you put the image in?
-//   console.log(slotDict['slot'+i]['correct_node']) //what node does the image supposed to be in the slot you put the image in correspond to?
-//   console.log(slotDict['slot'+i]['correct_type']) //what type of image is supposed to be in the slot you put the image in?
-//   console.log(slotDict['slot'+i]['current_src'])//what is the src/url of image put in the slot/what is the actual image dropped?
-//   console.log()//what node does the image we dropped correspond to?
-//   console.log(slotDict['slot'+i]['current_type'])//is the image we dropped a threat or neutral image?
-//   console.log(slotDict['slot'+i]['accuracy']) //is the image in the right slot in network diagram?
-// }
-
 }
 
 function whichNode(src){

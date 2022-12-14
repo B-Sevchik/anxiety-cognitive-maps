@@ -1,9 +1,9 @@
-let nGeneralDataPoints = 13
+let nGeneralDataPoints = 12
 let nSectionDataPoints = 4
-let nDragTaskDropDataPoints = 50
+let nDragTaskDropDataPoints = 12
 let nDragTaskCheckAnswerDataPoints = 50
-let nIllegalTransitionDataPoints = 50
-let nOddOneOutDataPoints = 50
+let nIllegalTransitionDataPoints = 11
+let nOddOneOutDataPoints = 24
 let generalData, sectionData, dragTaskDropData, dragTaskCheckAnswerData, illegalTransitionData, oddOneOutData;
 
 function dataOrder(){
@@ -17,7 +17,7 @@ function dataOrder(){
 }
 
 // general task data
-// [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempts, stimOnset, respOnset, respOnset - stimOnset, acc, nCorrect, partResp]
+// [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, acc, nCorrect, partResp]
 
 function logSectionData(){
 
@@ -39,15 +39,12 @@ function logSectionData(){
 }
 
 function logDragDropEvent(dropEvent){
-  console.log(dropEvent);
-
-  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempts, stimOnset, respOnset, respOnset - stimOnset, NaN, NaN, NaN]
+  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, NaN, NaN, NaN]
 
   sectionData = new Array(nSectionDataPoints).fill(NaN)
 
   // THIS IS DATA
   dragTaskDropData = Object.values(dropEvent)
-  console.log(dragTaskDropData);
 
   dragTaskCheckAnswerData = new Array(nDragTaskCheckAnswerDataPoints).fill(NaN)
 
@@ -60,9 +57,8 @@ function logDragDropEvent(dropEvent){
 }
 
 function logDragTaskCheckAnswerData(nCorrect, slotDict){
-  console.log(slotDict);
 
-  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempts, stimOnset, respOnset, respOnset - stimOnset, NaN, nCorrect, NaN]
+  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, NaN, nCorrect, NaN]
 
   sectionData = new Array(nSectionDataPoints).fill(NaN)
 
@@ -78,10 +74,10 @@ function logDragTaskCheckAnswerData(nCorrect, slotDict){
   console.log(data);
 }
 
-// [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempts, stimOnset, respOnset, respOnset - stimOnset, acc, nCorrect, partResp]
+// [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, acc, nCorrect, partResp]
 
 function logIllegalTransitionData(){
-  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempts, stimOnset, respOnset, respOnset - stimOnset, acc, NaN, partResp]
+  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, NaN, stimOnset, respOnset, respOnset - stimOnset, acc, NaN, partResp]
 
   sectionData = new Array(nSectionDataPoints).fill(NaN)
 

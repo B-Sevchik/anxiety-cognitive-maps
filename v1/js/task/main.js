@@ -21,7 +21,7 @@ let practiceAccCutoff = 80;
 // task variables
 let taskNetwork = new Network(), activeNode, prevNode, transitionType;
 let taskFunc, transitionFunc, stimTimeout, feedbackShown, missedSkip;
-let trialAttempts, consecutiveCorrectOnFirstTryTrials, oldParentDiv; //for drag task
+let trialAttempt, consecutiveCorrectOnFirstTryTrials, oldParentDiv; //for drag task
 let trialHistory = [];
 let networkPrepared = false;
 let actionArr, stimArr, switchRepeatArr, buffer, stimSet, stroopOnset, trialIsRepeat, trialIsNA, switchType, accArr;
