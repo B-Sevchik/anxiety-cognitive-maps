@@ -134,7 +134,7 @@ function endOfExperiment(){
     $("#RTs").val(data.join(";"));
 
     // debriefing script
-    updateMainMenu(4);
+    updateMainMenu(5);
   } catch (e) {
     alert("Data upload failed. Please refer to the instructions below.");
   }
