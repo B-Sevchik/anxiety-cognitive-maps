@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 function prepareMenu(){
   // update menu to first value
-  let initialExperimentStage = 4
+  let initialExperimentStage = 1
   updateMainMenu(initialExperimentStage);
 
   $("#demographicSubmit").click(function(){
@@ -143,7 +143,7 @@ $(document).on("click", "#STAI_submit", function(){
 
     };
 
-    // console.log(STAI_vals);
+    console.log(STAI_vals);
     // console.log(Object.keys(STAI_vals).length);
     // console.log(Object.keys(STAI_vals));
 

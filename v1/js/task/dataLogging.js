@@ -35,6 +35,13 @@ function logSectionData(){
 
   data.push(dataOrder())
   console.log(data);
+  //console.log('generalData-logSectionData', generalData.length)
+  //console.log('sectionData-logSectionData', sectionData.length)
+  //console.log('dragTaskDropData-logSectionData', dragTaskDropData.length)
+  //console.log('dragTaskCheckAnswerData-logSectionData', dragTaskCheckAnswerData.length)
+  //console.log('illegalTransitionData-logSectionData', illegalTransitionData.length)
+  console.log('oddOneOutData-logSectionData', oddOneOutData.length)
+
 
 }
 
@@ -54,6 +61,12 @@ function logDragDropEvent(dropEvent){
 
   data.push(dataOrder())
   console.log(data);
+  //console.log('generalData-logDragDropEvent', generalData.length)
+  //console.log('sectionData-logDragDropEvent', sectionData.length)
+  //console.log('dragTaskDropData-logDragDropEvent', dragTaskDropData.length)
+  //console.log('dragTaskCheckAnswerData-logDragDropEvent', dragTaskCheckAnswerData.length)
+  //console.log('illegalTransitionData-logDragDropEvent', illegalTransitionData.length)
+  console.log('oddOneOutData-logDragDropEvent', oddOneOutData.length)
 }
 
 function logDragTaskCheckAnswerData(nCorrect, slotDict){
@@ -72,6 +85,12 @@ function logDragTaskCheckAnswerData(nCorrect, slotDict){
 
   data.push(dataOrder())
   console.log(data);
+  //console.log('generalData-logDragCheckAnswerData', generalData.length)
+  //console.log('sectionData-logDragCheckAnswerData', sectionData.length)
+  //console.log('dragTaskDropData-logDragTaskCheckAnswerData', dragTaskDropData.length)
+  //console.log('dragTaskCheckAnswerData-logDragTaskCheckAnswerData', dragTaskCheckAnswerData.length)
+  //console.log('illegalTransitionData-logDragTaskCheckAnswerData', illegalTransitionData.length)
+  console.log('oddOneOutData-logDragTaskCheckAnswerData', oddOneOutData.length)
 }
 
 // [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, acc, nCorrect, partResp]
@@ -91,6 +110,12 @@ function logIllegalTransitionData(){
 
   data.push(dataOrder())
   console.log(data);
+  //console.log('generalData-logIllegalTransitionData', generalData.length)
+  //console.log('sectionData-logIllegalTransitionData', sectionData.length)
+  //console.log('dragTaskDropData-logIllegalTransitionData', dragTaskDropData.length)
+  //console.log('dragTaskCheckAnswerData-logIllegalTransitionData', dragTaskCheckAnswerData.length)
+  //console.log('illegalTransitionData-logIllegalTransitionData', illegalTransitionData.length)
+  console.log('oddOneOutData-logIllegalTransitionData', oddOneOutData.length)
 }
 
 function logOddOneOutData(currentNodeSet, imageNum){
@@ -108,4 +133,10 @@ function logOddOneOutData(currentNodeSet, imageNum){
 
   data.push(dataOrder())
   console.log(data);
+  //console.log('generalData-logOddOneOutData', generalData.length)
+  //console.log('sectionData-logOddOneOutData', sectionData.length)
+  //console.log('dragTaskDropData-logOddOneOutData', dragTaskDropData.length)
+  //console.log('dragTaskCheckAnswerData-logOddOneOutData', dragTaskCheckAnswerData.length)
+  //console.log('illegalTransitionData-logOddOneOutData', illegalTransitionData.length)
+  console.log('oddOneOutData-logOddOneOutData', oddOneOutData.length)
 }
