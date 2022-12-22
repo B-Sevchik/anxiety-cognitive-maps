@@ -13,6 +13,7 @@ function illegalTransitionTask(){
   legalIllegalArray = prepareLegalIllegalArray();
   transitionType = legalIllegalArray[trialCount-1];
   transitionFunc = networkTransition;
+  taskFunc = runIllegalTransition;
 
   // start task after countdown
   countDown(runIllegalTransition, 3);

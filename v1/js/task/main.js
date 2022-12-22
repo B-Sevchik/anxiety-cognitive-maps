@@ -165,6 +165,6 @@ function keyUpFunction(event){
 
     // resume task
     keyListener = 0; sectionType = "mainTask";
-    countDown(3);
+    countDown(taskFunc, 3);
   }
 }

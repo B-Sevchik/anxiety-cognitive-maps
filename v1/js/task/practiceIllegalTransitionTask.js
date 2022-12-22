@@ -12,6 +12,7 @@ function practiceIllegalTransitionTask(){
   legalIllegalArray = preparePracticeArray();
   transitionType = legalIllegalArray[trialCount-1];
   transitionFunc = practiceTransition;
+  taskFunc = runIllegalPractice;
 
   // start task after countdown
   countDown(runIllegalPractice, 3);
