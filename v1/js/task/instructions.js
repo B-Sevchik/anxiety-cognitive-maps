@@ -115,7 +115,7 @@ function getNextInstructions(slideNum, expStage){
         case 1:
           $( getImageText(instructionImages[3])).insertAfter( "#instructions" + slideNum);
           changeTextFormat('#instructions' + slideNum,'margin-bottom', '5px');
-          return "Jack and Jill are playing a game where they take turns choosing a picture from the network you just memorized. They are only allowed to pick a picture that is adjacent to the previous picture. For example, in the diagram below, if the current picture is the lightning bolt they would only be allowed to pick pine cones or pig, not yarn.";
+          return "Jack and Jill are playing a game where they take turns choosing a picture from the network you just memorized. They are only allowed to pick a picture that is adjacent to the previous picture. A picture is considered adjacent to another picture in the network if a line extends between the two pictures to connect them.  For example, in the diagram below, if the current picture is the lightning bolt they would only be allowed to pick pine cones or pig, not yarn, since there is no line extending from lightning bolt to yarn and they are therefore not adjacent.";
         case 2:
           return "Imagine you are Jack and Jill's caretaker, and you want to make sure they are playing fairly. Jill loves to cheat. Sometimes, she will choose a picture that is NOT adjacent to the previous picture. Your job is to catch whenever she tries to cheat.";
         case 3:
