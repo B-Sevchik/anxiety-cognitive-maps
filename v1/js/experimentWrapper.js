@@ -85,7 +85,7 @@ $(document).ready(function(){
 
 function prepareMenu(){
   // update menu to first value
-  let initialExperimentStage = 4 //start at demographics, no sound check needed
+  let initialExperimentStage = 2 //start at demographics, no sound check needed
   updateMainMenu(initialExperimentStage);
 
   $("#demographicSubmit").click(function(){
