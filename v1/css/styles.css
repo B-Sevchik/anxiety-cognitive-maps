@@ -1,6 +1,6 @@
 /* high level defaults */
 :root {
-  --size-scale: 0.6;
+  --size-scale: 0.8;
 }
 
 html{
@@ -266,6 +266,7 @@ canvas {
   border-style: solid;
   display: flex;
   position: relative;
+  justify-content: center;
 }
 
 #picture-container{

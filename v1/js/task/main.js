@@ -30,7 +30,7 @@ let data=[], taskName, trialCount, blockTrialCount, acc, accCount, stimOnset, re
 let breakOn = false, repeatNecessary = false; //variables for block breaks and repeating practie blocks
 let sectionStart, sectionEnd, sectionType, sectionTimer; //for logging non experimental sections (instruction and break screens)
 let dropOnset, prevDropOnset; // global variables for logging drag task drop events
-let imageSize = 150, imageScale = 0.6;
+let imageSize = 150, imageScale = 0.8;
 let keyListener = 0;
 /*  key press listener values:
       0: No key press expected/needed => do nothing. KL => 3
@@ -95,27 +95,8 @@ function keyPressFunction(event){
 
     // accuracy
     partResp = event.which;
-    // reaction time
     respOnset = new Date().getTime() - runStart;
     respTime = respOnset - stimOnset;
-
-    if (taskName == "practiceTransitionTask") {
-      if (transitionType == "l") {
-        // partResp will = 90 or 122 if 'z' pressed
-        if ([90, 122].indexOf(partResp) != -1) {
-          acc = 1;
-        } else {
-          acc = 0;
-        }
-      } else if (transitionType == "i") {
-        // partResp will = 77 or 109 if 'z' pressed
-        if ([77, 109].indexOf(partResp) != -1) {
-          acc = 1;
-        } else {
-          acc = 0;
-        }
-      }
-    }
   }
 }
 

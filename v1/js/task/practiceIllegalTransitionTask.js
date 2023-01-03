@@ -43,21 +43,26 @@ function practiceTrial(){
   if (trialCount == 1) {
     setTimeout(practiceTransition, stimInterval);
   } else {
+    // need to proceed with key press
     keyListener = 1;
   }
-
-  // go to next trial after delay
-  // setTimeout(practiceTransition, stimInterval);
 }
 
 function practiceTransition(){
+  //determine accuracy
+  if (transitionType == "l") {
+    acc = ([90, 122].indexOf(partResp) != -1) ? 1 : 0;
+  } else if (transitionType == "i") {
+    acc = ([77, 109].indexOf(partResp) != -1) ? 1 : 0;
+  }
+
+  // determine if missed skip or false alarm
+  missedSkip = (transitionType == "i" && !acc);
+  falseAlarm = (transitionType == "l" && !acc);
+
   if (!feedbackShown && trialCount != 1) {
-    // feedback (legal or illegal)
-    if (transitionType == "i") {
-      showIllegalTransition();
-    } else {
-      showLegalTransition();
-    }
+
+    showNetworkTransition(transitionType == "l")
 
   } else {
 

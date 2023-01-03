@@ -64,8 +64,8 @@ function networkTransition(){
   }
 
   // determine if missed skip or false alarm
-  missedSkip = (transitionType == "i" && !partResp);
-  falseAlarm = (transitionType == "l" && Boolean(partResp));
+  missedSkip = (transitionType == "i" && !acc);
+  falseAlarm = (transitionType == "l" && !acc);
 
   if (!acc && !feedbackShown && showFeedback) {
 
