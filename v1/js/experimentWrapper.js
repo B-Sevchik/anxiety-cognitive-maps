@@ -50,9 +50,9 @@ $(document).ready(function(){
   document.getElementById('hitId').value = mt.hitid;
   document.getElementById('workerId').value = mt.workerid;
 
-  console.log(document.getElementById('assignmentId').value);
-  console.log(document.getElementById('hitId').value);
-  console.log(document.getElementById('workerId').value);
+  console.log('assid: ', document.getElementById('assignmentId').value);
+  console.log('hitid: ',document.getElementById('hitId').value);
+  console.log('workerid: ',document.getElementById('workerId').value);
 
   // prevents multiple soundcheck checkboxes being selected
   $('input[type="checkbox"]').on('change', function(){
