@@ -407,6 +407,7 @@ canvas {
   /* border-style: solid; */
   display: none;
   position: relative;
+  justify-content: center;
 }
 
 #plot0{
