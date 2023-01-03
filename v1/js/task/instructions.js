@@ -8,7 +8,7 @@ let instructions = {
   },
   // contains the max value of each instruction iteration. iteration will STOP at max.
   max: {
-    "main1-1": 4, "main1-2": 7, "main2": 6, "main3": 4, "main4": 8, "final": 1
+    "main1-1": 4, "main1-2": 7, "main2": 7, "main3": 4, "main4": 8, "final": 1
   },
   // what does instruction section end with?
   // #nextSectionButton, #startExpButton, keyPressNextSection, keyPressStartTask
@@ -86,7 +86,7 @@ function getNextInstructions(slideNum, expStage){
         case 1:
           return "Welcome to the experiment, thank you for your participation!";
         case 2:
-          return "In this experiment you will perform a task where you learn a network structure of objects. You will also complete a few follow-up tasks after you finish the main task, including a few where you will indicate the font color of text. The experiment is expected to take approximately 35 to 45 minutes.";
+          return "In this experiment, you will perform a task where you learn a network structure of images. You will then perform two follow up tasks designed to test your knowledge of the network structure. The experiment is expected to take approximately 35 to 45 minutes.";
         case 3:
           return "Please enlarge this window to its maximum size and sit a comfortable distance from your computer screen.";
         case 4:
@@ -95,38 +95,39 @@ function getNextInstructions(slideNum, expStage){
     case "main1-2":
       switch (slideNum){
         case 1:
-          return "In this first task, you will memorize the locations of the images within a network structure.";
+          return "In this first task, you will memorize the locations of some images within a network structure.";
         case 2:
-          return "You will see an empty network structure and a bank of images at the top.";
+          return "You will see an empty network structure along with a bank of images.";
         case 3:
-          return "Drag & drop each image from the image bank into the slots of the network structure to correspond to their positions shown above. Press 'check answer' when you are finished.";
+          return "Drag & drop each image from the image bank into the slots of the network structure. At first you will just be guessing. Press 'check answer' when you are finished filling in the network structure.";
         case 4:
-          return "If your placement of an image is correct, the box will be outlined in green. However, if your placement of an image is incorrect, the box will be outlined in red.";
+          return "If an image is in the correct location, the box it is in will be outlined in green. If the image is in the wrong location, the box will be outlined in red.";
         case 5:
-          return "If an image is incorrect, drag and drop to replace it with other incorrect images, and press 'check answer' again. You will continue guessing and checking which images go where until all the images are in the correct box, as indicated by green outlines.";
+          return "If an image is incorrect, drag and drop it to replace it with other incorrect images, and press 'check answer' again. Continue guessing and checking until all the images are in the correct locations.";
         case 6:
-          return "You will repeat this process until you have learned the network structure. The task is expected to take approximately 10 minutes, but varies depending on your accuracy.";
+          return "<b>You will repeat the above process until you have learned the network structure, by placing all images correctly on the first attempt 3 consecutive times.</b> The task is expected to take approximately 10 minutes, but varies depending on your accuracy.";
         case 7:
-          changeTextFormat('#instructions' + slideNum,'font-weight','bold');
           return "Press the Start Experiment button when you are ready to begin the task.";
       }
     case "main2":
       switch (slideNum){
         case 1:
+          return "Great job! You will now complete task 2 based on your knowledge of the network structure."
+        case 2:
           $( getImageText(instructionImages[3])).insertAfter( "#instructions" + slideNum);
           changeTextFormat('#instructions' + slideNum,'margin-bottom', '5px');
-          return "Jack and Jill are playing a game where they take turns choosing a picture from the network you just memorized. They are only allowed to pick a picture that is adjacent to the previous picture. A picture is considered adjacent to another picture in the network if a line extends between the two pictures to connect them.  For example, in the diagram below, if the current picture is the lightning bolt they would only be allowed to pick pine cones or pig, not yarn, since there is no line extending from lightning bolt to yarn and they are therefore not adjacent.";
-        case 2:
-          return "Imagine you are Jack and Jill's caretaker, and you want to make sure they are playing fairly. Jill loves to cheat. Sometimes, she will choose a picture that is NOT adjacent to the previous picture. Your job is to catch whenever she tries to cheat.";
+          return "Jack and Jill are playing a game where they take turns choosing a picture from the network you just memorized. They are only allowed to pick a picture that is adjacent to the previous picture. A picture is considered adjacent to another picture if a line connects them. For example, in the diagram below, if the current picture is the 'lightning bolt', they would only be allowed to pick 'pine cones' or 'pig', not 'yarn', since there is no line connecting 'lightning bolt' and 'yarn'.";
         case 3:
-          return "In this next task, you will see a series of images from the network structure you just memorized. Press 'z' whenever Jill makes a correct move and 'm' whenever she cheats.";
+          return "Imagine you are Jack and Jill's caretaker, and you want to make sure they are playing fairly. Jill loves to cheat. Sometimes, she will choose a picture that is NOT adjacent to the previous picture. Your job is to catch whenever she tries to cheat.";
         case 4:
-          return "You will start with a practice task, and you will receive feedback on every trial. You need at least 80% accuracy to proceed to the main task."
+          return "In this next task, you will see a series of images from the network structure you just memorized. Press 'z' whenever Jill makes a correct move and 'm' whenever she cheats.";
         case 5:
+          return "You will start with a practice task, and you will receive feedback on every trial. You need at least 80% accuracy to proceed to the main task."
+        case 6:
           iterateAgain = true;
           $( getImageText(instructionImages[4])).insertAfter( "#instructions" + slideNum);
           return "Please place your fingers on the 'z' and 'm' keys before beginning the task. Remember to respond as quickly and as accurately as possible."
-        case 6:
+        case 7:
           changeTextFormat('#instructions' + slideNum,'font-weight','bold');
           return "Press any button to begin the task."
       }
@@ -195,7 +196,7 @@ function runInstructions(){
 
     // loop through instructions and show
     for (var i = 1; i <= instructions["max"][expStage]; i++) {
-      $('#instructions' + i).text( getNextInstructions( i, expStage ));
+      $('#instructions' + i).html( getNextInstructions( i, expStage ));
     }
 
     // reset iterateAgain in case looping turned it on by accident
@@ -269,7 +270,7 @@ function runInstructions(){
 
 function iterateInstruction(){
   let instrNum = instructions["iterator"][expStage];
-  $('#instructions' + instrNum).text( getNextInstructions( instrNum, expStage));
+  $('#instructions' + instrNum).html( getNextInstructions( instrNum, expStage));
 
   // iterate as appropriate or allow next phase
   if (instrNum < instructions["max"][expStage]){

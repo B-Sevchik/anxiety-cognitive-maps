@@ -46,7 +46,7 @@ function networkTrial(){
 
   // display network and image
   if (showNetworkWalk) drawNetwork();
-  displayImage();
+  requestAnimationFrame(displayImage);
 
   // set up for response
   stimOnset = new Date().getTime() - runStart;
@@ -58,20 +58,18 @@ function networkTrial(){
 
 function networkTransition(){
   if (transitionType == "i") {
-    acc = (Boolean(partResp)) ? 1 : 0;
+    acc = (partResp) ? 1 : 0;
   } else {
-    acc = (Boolean(partResp)) ? 0 : 1;
+    acc = (partResp) ? 0 : 1;
   }
-  let missedSkip = (transitionType == "i" && !partResp);
-  let falseAlarm = (transitionType == "l" && Boolean(partResp));
-  let mistake = missedSkip || falseAlarm;
-  if (mistake && !feedbackShown && showFeedback) {
 
-    if (transitionType == "i") {
-      showIllegalTransition();
-    } else {
-      showLegalTransition();
-    }
+  // determine if missed skip or false alarm
+  missedSkip = (transitionType == "i" && !partResp);
+  falseAlarm = (transitionType == "l" && Boolean(partResp));
+
+  if (!acc && !feedbackShown && showFeedback) {
+
+    showNetworkTransition(transitionType == "l")
 
   } else {
 

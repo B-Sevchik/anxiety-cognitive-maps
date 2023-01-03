@@ -40,7 +40,7 @@ function logSectionData(){
   //console.log('dragTaskDropData-logSectionData', dragTaskDropData.length)
   //console.log('dragTaskCheckAnswerData-logSectionData', dragTaskCheckAnswerData.length)
   //console.log('illegalTransitionData-logSectionData', illegalTransitionData.length)
-  console.log('oddOneOutData-logSectionData', oddOneOutData.length)
+  // console.log('oddOneOutData-logSectionData', oddOneOutData.length)
 
 
 }
@@ -66,7 +66,7 @@ function logDragDropEvent(dropEvent){
   //console.log('dragTaskDropData-logDragDropEvent', dragTaskDropData.length)
   //console.log('dragTaskCheckAnswerData-logDragDropEvent', dragTaskCheckAnswerData.length)
   //console.log('illegalTransitionData-logDragDropEvent', illegalTransitionData.length)
-  console.log('oddOneOutData-logDragDropEvent', oddOneOutData.length)
+  // console.log('oddOneOutData-logDragDropEvent', oddOneOutData.length)
 }
 
 function logDragTaskCheckAnswerData(nCorrect, slotDict){
@@ -90,7 +90,7 @@ function logDragTaskCheckAnswerData(nCorrect, slotDict){
   //console.log('dragTaskDropData-logDragTaskCheckAnswerData', dragTaskDropData.length)
   //console.log('dragTaskCheckAnswerData-logDragTaskCheckAnswerData', dragTaskCheckAnswerData.length)
   //console.log('illegalTransitionData-logDragTaskCheckAnswerData', illegalTransitionData.length)
-  console.log('oddOneOutData-logDragTaskCheckAnswerData', oddOneOutData.length)
+  // console.log('oddOneOutData-logDragTaskCheckAnswerData', oddOneOutData.length)
 }
 
 // [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, acc, nCorrect, partResp]
@@ -115,7 +115,7 @@ function logIllegalTransitionData(){
   //console.log('dragTaskDropData-logIllegalTransitionData', dragTaskDropData.length)
   //console.log('dragTaskCheckAnswerData-logIllegalTransitionData', dragTaskCheckAnswerData.length)
   //console.log('illegalTransitionData-logIllegalTransitionData', illegalTransitionData.length)
-  console.log('oddOneOutData-logIllegalTransitionData', oddOneOutData.length)
+  // console.log('oddOneOutData-logIllegalTransitionData', oddOneOutData.length)
 }
 
 function logOddOneOutData(currentNodeSet, imageNum){
@@ -138,5 +138,5 @@ function logOddOneOutData(currentNodeSet, imageNum){
   //console.log('dragTaskDropData-logOddOneOutData', dragTaskDropData.length)
   //console.log('dragTaskCheckAnswerData-logOddOneOutData', dragTaskCheckAnswerData.length)
   //console.log('illegalTransitionData-logOddOneOutData', illegalTransitionData.length)
-  console.log('oddOneOutData-logOddOneOutData', oddOneOutData.length)
+  // console.log('oddOneOutData-logOddOneOutData', oddOneOutData.length)
 }

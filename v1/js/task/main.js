@@ -20,7 +20,7 @@ let practiceAccCutoff = 80;
 
 // task variables
 let taskNetwork = new Network(), activeNode, prevNode, transitionType;
-let taskFunc, transitionFunc, stimTimeout, feedbackShown, missedSkip;
+let taskFunc, transitionFunc, stimTimeout, feedbackShown, missedSkip, falseAlarm;
 let trialAttempt, consecutiveCorrectOnFirstTryTrials, oldParentDiv; //for drag task
 let trialHistory = [];
 let networkPrepared = false;
@@ -119,18 +119,12 @@ function keyPressFunction(event){
   }
 }
 
-// function keyUpFunction(event){
-//   switch(keyListener){
-//     case ""
-//   }
-// }
-
-
-
 function keyUpFunction(event){
   if (keyListener == 2 ) { //good press release
-    clearTimeout(stimTimeout);
-    transitionFunc();
+    if (taskName != "illegalTransitionTask") {
+      clearTimeout(stimTimeout);
+      transitionFunc();
+    }
     keyListener = 0;
   } else if (keyListener == 3) { //resets bad press to 0
     keyListener = 0;

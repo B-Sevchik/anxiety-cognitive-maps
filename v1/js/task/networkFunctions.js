@@ -239,45 +239,34 @@ function getNetworkDiagramReady(){
   document.getElementById("lowerText").style.top = 425*imageScale + 'px';
 }
 
-function showIllegalTransition(){
+function showNetworkTransition(legal=True){
   feedbackShown = true;
   let waitTime = (acc) ? correctTime : incorrectTime;
+
+  // hide canvas and show feedback (with arrow for illegal transitions)
   $(".canvasas").hide();
   $("#network-diagram").show();
   clearSVGArrows("svg2");
-  drawSVGArrow(prevNode.index-1,activeNode.index-1,"#network-container-sm","svg2");
-  if (!partResp || acc == 0) {
+  if (!legal) {
+    drawSVGArrow(prevNode.index-1,activeNode.index-1,"#network-container-sm","svg2");
+  }
+
+  // draw text based on response (correct, missed skip, false alarm)
+  if (acc) {
+    $("#upperText").css("color", "green");
+    document.getElementById("upperText").innerHTML = "Correct";
+    document.getElementById("lowerText").innerHTML = "";
+  } else if (missedSkip) {
     $("#upperText").css("color", "red");
     document.getElementById("upperText").innerHTML = "Incorrect";
     document.getElementById("lowerText").innerHTML = "Jill cheated! The task will resume in 3 seconds.";
-  } else {
-    $("#upperText").css("color", "green");
-    document.getElementById("upperText").innerHTML = "Correct";
-    document.getElementById("lowerText").innerHTML = "";
-  }
-  setTimeout(function(){
-    $(".canvasas").show();
-    $("#network-diagram").hide()
-    transitionFunc();
-  },waitTime);
-}
-
-function showLegalTransition(){
-  feedbackShown = true;
-  $(".canvasas").hide();
-  $("#network-diagram").show();
-  clearSVGArrows("svg2");
-  let waitTime = (acc) ? correctTime : incorrectTime;
-  if (acc == 0) {
+  } else if (falseAlarm) {
     $("#upperText").css("color", "red");
     document.getElementById("upperText").innerHTML = "Incorrect";
     document.getElementById("lowerText").innerHTML = "Jill didn't cheat! The task will resume in 3 seconds.";
-  } else {
-    $("#upperText").css("color", "green");
-    document.getElementById("upperText").innerHTML = "Correct";
-    document.getElementById("lowerText").innerHTML = "";
   }
-  // proceed back to practice transition
+
+  // proceed after delay
   setTimeout(function(){
     $(".canvasas").show();
     $("#network-diagram").hide()
