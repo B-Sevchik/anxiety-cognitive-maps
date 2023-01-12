@@ -168,7 +168,6 @@ function displayNetworkDragTask(){
 function setUpCheckAnswerButton(){
   $(document).on("click", "#networkDragCheckAnswer", function(){
       respOnset = new Date().getTime() - runStart;
-      prevDropOnset = respOnset;
       // color images if correct or incorrect
       let nCorrect = 0;
       let anyIncorrect = false;
@@ -208,6 +207,8 @@ function setUpCheckAnswerButton(){
       }
       sectionType = "dragTaskCheckAnswerEvent"
       logDragTaskCheckAnswerData(nCorrect, slotDict);
+      stimOnset = respOnset;
+      prevDropOnset = respOnset;
       trialAttempt++;
   });
 }

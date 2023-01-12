@@ -86,7 +86,7 @@ function getNextInstructions(slideNum, expStage){
         case 1:
           return "Welcome to the experiment, thank you for your participation!";
         case 2:
-          return "In this experiment, you will perform a task where you learn a network structure of images. You will then perform two follow up tasks designed to test your knowledge of the network structure. The experiment is expected to take approximately 35 to 45 minutes.";
+          return "In this experiment, you will perform a task where you learn a network structure of images. You will then perform two follow up tasks designed to test your knowledge of the network structure. The experiment is expected to take approximately 30 to 40 minutes.";
         case 3:
           return "Please enlarge this window to its maximum size and sit a comfortable distance from your computer screen.";
         case 4:

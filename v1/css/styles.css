@@ -368,7 +368,7 @@ canvas {
   margin-top: calc(250px * var(--size-scale));
 }
 
-#slot5{
+#slot6{
   margin-bottom: calc(250px * var(--size-scale));
 }
 
@@ -430,7 +430,7 @@ canvas {
   margin-right: 10px;
 }
 
-#plot6{
+#plot5{
   margin-left: 10px;
 }
 
@@ -442,7 +442,7 @@ canvas {
   margin-top: calc(167px * var(--size-scale));
 }
 
-#plot5{
+#plot6{
   margin-bottom: calc(167px * var(--size-scale));
 }
 

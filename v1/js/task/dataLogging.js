@@ -46,7 +46,7 @@ function logSectionData(){
 }
 
 function logDragDropEvent(dropEvent){
-  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, stimOnset, respOnset, respOnset - stimOnset, NaN, NaN, NaN]
+  generalData = [sectionType, taskName, trialCount, blockTrialCount, block, trialAttempt, prevDropOnset, dropOnset, dropOnset - prevDropOnset, NaN, NaN, NaN]
 
   sectionData = new Array(nSectionDataPoints).fill(NaN)
 
